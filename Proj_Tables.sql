@@ -1,45 +1,71 @@
-CREATE TABLE College (
-    id INT PRIMARY KEY,
-    name VARCHAR(255)
-);
+
 
 CREATE TABLE Department (
-    id INT PRIMARY KEY,
-    college_id INT,
-    head_id INT,
-    FOREIGN KEY (college_id) REFERENCES College(id),
-    FOREIGN KEY (head_id) REFERENCES Instructor(head_id)
+    d_id INT PRIMARY KEY,
+    building INT
 );
 
 CREATE TABLE Instructor (
-    id INT PRIMARY KEY,
-	head_id INT,
+    i_id INT PRIMARY KEY,
     name VARCHAR(255),
-    department_id INT,
-    FOREIGN KEY (department_id) REFERENCES Department(id)
+    d_id INT,
+    FOREIGN KEY (d_id) REFERENCES Department(d_id)
 );
 
 CREATE TABLE Course (
-    id INT PRIMARY KEY,
-    name VARCHAR(255),
-    department_id INT,
-    instructor_id INT,
-	capacity INT,
-    FOREIGN KEY (department_id) REFERENCES Department(id),
-    FOREIGN KEY (instructor_id) REFERENCES Instructor(id)
+    c_id INT PRIMARY KEY,
+    title VARCHAR(255),
+	credits VARCHAR(255),
+    d_id INT,
+    FOREIGN KEY (d_id) REFERENCES Department(d_id),
 );
 
 CREATE TABLE Student (
-	id INT PRIMARY KEY,
+    s_id INT PRIMARY KEY,
     first_name VARCHAR(255),
-	last_name VARCHAR(255),
-	gender VARCHAR(255)
+    last_name VARCHAR(255),
+    gender VARCHAR(255)
 ); 
 
-CREATE TABLE Enrollment (
-    student_id INT,
-    course_id INT,
-    PRIMARY KEY (student_id, course_id),
-    FOREIGN KEY (student_id) REFERENCES Student(id),
-    FOREIGN KEY (course_id) REFERENCES Course(id)
+CREATE TABLE Timeslot (
+	ts_id INT PRIMARY KEY,
+	start_time TIME,
+	end_time TIME,
 );
+
+CREATE TABLE Section (
+	sec_id INT,
+	c_id INT,
+	ts_id INT,
+	i_id INT,
+	semester CHAR(3),
+	year INT,
+	capacity INT,
+	enrolled INT,
+    PRIMARY KEY (sec_id, c_id, ts_id, i_id, semester, year),
+	FOREIGN KEY (c_id) REFERENCES Course(c_id),
+	FOREIGN KEY (ts_id) REFERENCES Timeslot(ts_id),
+	FOREIGN KEY (i_id) REFERENCES Instructor(i_id)
+);
+
+
+CREATE TABLE Takes (
+	sec_id INT,
+	c_id INT,
+	ts_id INT,
+	i_id INT,
+	semester CHAR(3),
+	year INT,
+	s_id INT,
+	PRIMARY KEY (sec_id, c_id, ts_id, i_id, semester, year, s_id),
+	FOREIGN KEY (s_id) REFERENCES Student(s_id),
+	FOREIGN KEY (sec_id, c_id, ts_id, i_id, semester, year) REFERENCES Section(sec_id, c_id, ts_id, i_id, semester, year)
+);
+
+
+CREATE TABLE Prereq (
+	c_id INT PRIMARY KEY,
+	title VARCHAR(255),
+	credits INT
+);
+
