@@ -1,28 +1,28 @@
 CREATE TABLE IF NOT EXISTS Department (
-    d_id INT PRIMARY KEY,
-    building INT NOT NULL
+	d_id INT PRIMARY KEY,
+	building INT NOT NULL
 );
 
 CREATE TABLE Instructor (
-    i_id INT PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
-    d_id INT NOT NULL,
-    FOREIGN KEY (d_id) REFERENCES Department(d_id)
+	i_id INT PRIMARY KEY,
+	name VARCHAR(255) NOT NULL,
+	d_id INT NOT NULL,
+	FOREIGN KEY (d_id) REFERENCES Department(d_id)
 );
 
 CREATE TABLE Course (
-    c_id INT PRIMARY KEY,
-    title VARCHAR(255) NOT NULL,
+	c_id INT PRIMARY KEY,
+	title VARCHAR(255) NOT NULL,
 	credits VARCHAR(255) NOT NULL,
-    d_id INT NOT NULL,
-    FOREIGN KEY (d_id) REFERENCES Department(d_id),
+	d_id INT NOT NULL,
+	FOREIGN KEY (d_id) REFERENCES Department(d_id),
 );
 
 CREATE TABLE Student (
-    s_id INT PRIMARY KEY,
-    first_name VARCHAR(255) NOT NULL,
-    last_name VARCHAR(255) NOT NULL,
-    gender VARCHAR(255) NOT NULL
+	s_id INT PRIMARY KEY,
+	first_name VARCHAR(255) NOT NULL,
+	last_name VARCHAR(255) NOT NULL,
+	gender VARCHAR(255) NOT NULL
 ); 
 
 CREATE TABLE Timeslot (
@@ -40,7 +40,7 @@ CREATE TABLE Section (
 	year INT NOT NULL,
 	capacity INT NOT NULL,
 	enrolled INT NOT NULL,
-    PRIMARY KEY (sec_id, c_id, ts_id, i_id, semester, year),
+	PRIMARY KEY (sec_id, c_id, ts_id, i_id, semester, year),
 	FOREIGN KEY (c_id) REFERENCES Course(c_id),
 	FOREIGN KEY (ts_id) REFERENCES Timeslot(ts_id),
 	FOREIGN KEY (i_id) REFERENCES Instructor(i_id)
