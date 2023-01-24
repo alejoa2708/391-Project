@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS Department (
+CREATE TABLE Department (
 	d_id INT PRIMARY KEY,
 	building INT NOT NULL
 );
