@@ -1,5 +1,5 @@
 {
-    "name": "testing_ssms",
+    "name": "391-server",
     "version": "0.1.0",
     "private": true,
     "dependencies": {
@@ -18,12 +18,8 @@
       "web-vitals": "^2.1.4"
     },
     "scripts": {
-      "start": "react-scripts start",
       "dev": "run p server start",
-      "server": "nodemon server.js",
-      "build": "react-scripts build",
-      "test": "react-scripts test",
-      "eject": "react-scripts eject"
+      "server": "nodemon server.js"
     },
     "eslintConfig": {
       "extends": [

@@ -1,7 +1,7 @@
-const   express = require('express'),
-        dbOperations = require('./dbFiles/dpOperation'),
-        Student = require('./dbFiles/student'),
-        cors = require('cors');
+const express = require('express'),
+    dbOperations = require('./dbFiles/dpOperation'),
+    Student = require('./dbFiles/student'),
+    cors = require('cors');
 
 const API_PORT = process.env.PORT || 5000;
 const app = express();

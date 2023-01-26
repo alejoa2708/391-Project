@@ -1,6 +1,11 @@
-const config        =require ('./dbConfig'),
-      sql           =require('mssql');
+const config = require ('./dbConfig'),
+      sql = require('mssql');
 
+
+/**
+ * 
+ * @returns 
+ */
 const getStudents = async() => {
     try{
         let pool = await sql.connect(config);
@@ -13,6 +18,11 @@ const getStudents = async() => {
     }
 }
 
+/**
+ * 
+ * @param {*} Student 
+ * @returns 
+ */
 const insertStudent = async(Student) => {
     try{
         let pool = await sql.connect(config);
