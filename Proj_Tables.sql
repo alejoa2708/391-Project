@@ -1,5 +1,6 @@
 CREATE TABLE Department (
 	d_id INT PRIMARY KEY,
+	d_name VAR CHAR(255) NOT NULL,
 	building INT NOT NULL
 );
 
@@ -13,7 +14,7 @@ CREATE TABLE Instructor (
 CREATE TABLE Course (
 	c_id INT PRIMARY KEY,
 	title VARCHAR(255) NOT NULL,
-	credits VARCHAR(255) NOT NULL,
+	credits INT NOT NULL,
 	d_id INT NOT NULL,
 	FOREIGN KEY (d_id) REFERENCES Department(d_id),
 );
@@ -62,8 +63,11 @@ CREATE TABLE Takes (
 
 
 CREATE TABLE Prereq (
-	c_id INT PRIMARY KEY,
+	c_id INT,
+	p_id INT,
 	title VARCHAR(255) NOT NULL,
-	credits INT NOT NULL
+	credits INT NOT NULL,
+	PRIMARY KEY (c_id, p_id),
+	FOREIGN KEY (c_id) REFERENCES Course (c_id)
 );
 
