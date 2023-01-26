@@ -1,6 +1,6 @@
 CREATE TABLE Department (
 	d_id INT PRIMARY KEY,
-	d_name VAR CHAR(255) NOT NULL,
+	d_name VARCHAR(255) NOT NULL,
 	building INT NOT NULL
 );
 
