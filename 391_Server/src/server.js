@@ -1,3 +1,5 @@
+// import Database from './database/database';
+
 const express = require('express'),
     dbOperations = require('./dbFiles/dpOperation'),
     Student = require('./dbFiles/student'),
@@ -16,3 +18,4 @@ dbOperations.getStudents().then(res => {
 app.listen(API_PORT, () => console.log(`Listening port ${API_PORT}`));
 
 //To start or test, run "npm run server" into the terminal
+
