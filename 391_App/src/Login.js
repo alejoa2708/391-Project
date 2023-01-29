@@ -3,24 +3,25 @@ import React from 'react';
 import { IonButton, IonContent, IonInput, IonItem, IonLabel, IonPage } from '@ionic/react';
 import './Login.css';
 import ReactDOM from 'react-dom';
+import Helper from './helper';
 import { RouteComponentProps, useHistory } from "react-router-dom";
 
-function Login() {
-    const lightVuLogo = 'https://www.macewan.ca/data/people/people/e/elhajjm/fullpicture.jpg'
 
-    let username = '';
+function Login() {
+    const moImg = 'https://www.macewan.ca/data/people/people/e/elhajjm/fullpicture.jpg'
+
+    let email = '';
 	let password = '';
 	let errorMessage = '';
-	const history = useHistory();
 
     /**
 	 * Captures user input from an input element and set the value into
 	 * username variable.
 	 * @param e An input event that is typed in by the user
 	 */
-	 function onEmailChange(e) {
-		username = e.detail.value;
-		//console.log(username);
+	function onEmailChange(e) {
+		email = e.detail.value;
+		console.log(email);
 	}
 
 	/**
@@ -28,14 +29,48 @@ function Login() {
 	 * password variable.
 	 * @param e An input event that is typed in by the user
 	 */
-	 function onPasswordChange(e) {
+	function onPasswordChange(e) {
 		password = e.detail.value;
-		//console.log(password);
+		console.log(password);
 	}
 
-    function onLoginButton () {
-        console.log("Sike...")
-    }
+	function onLoginButton() {
+		console.log(email);
+		console.log(password);
+	  
+		//let { email, password } = this;
+	  
+		if (email.length < 3) {
+		  return sendError('The email you have entered is invalid.');
+		}
+	  
+		if (password.length < 3) {
+		  return sendError('The password you have entered is invalid.');
+		}
+		console.log('here1');
+		Helper.post(Helper.getAPIUrl('login'), { email, password }).then(response => {
+			console.log('here2');
+			if (!response || !response.data || !response.data.success) {
+			return sendError('The credentials you have entered are invalid.');
+		  }
+		  console.log(response);
+		  console.log('here3');
+		  //Helper.setUserId(response.data.userId);
+		  //props.history.push('/dashboard');
+		  console.log('here4');
+		  window.location.replace('/dashboard');
+		});
+	}
+	
+	/**
+	 * Send error of parameter 'message' to the 'error-message' in
+	 * ReactDOM.render().
+	 * @param message a string error message to be displayed
+	 */
+	function sendError(message = '') {
+		ReactDOM.render((<p id="error-message">{message}</p>), document.getElementById('error-message'));
+	}
+	  
 
     return (
 		<IonPage>
@@ -47,7 +82,7 @@ function Login() {
 					<div id='content-wrapper' className='float'>
 						<div id='login-content'>
 							<div className='header'>
-								<img src={lightVuLogo} alt="LightVU"></img>
+								<img src={moImg}></img>
 							</div>
 							<div className='login-box'>
 								<div id='upper-box-wrapper'>

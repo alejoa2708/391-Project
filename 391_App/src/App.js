@@ -24,6 +24,7 @@ import '@ionic/react/css/flex-utils.css';
 import '@ionic/react/css/display.css';
 
 import Login from './/Login';
+import Dashboard from './/Dashboard';
 
 setupIonicReact();
 
@@ -36,9 +37,9 @@ const App = () => {
 						<Route path="/login" component={Login} />
 						<Redirect exact from="/" to="/login" />
 
-						{/* <Route exact path="/dashboard" component={Dashboard} />
-
-						<Route exact path="/admin" component={Admin} />
+						<Route exact path="/dashboard" component={Dashboard} />
+						
+						{/* <Route exact path="/admin" component={Admin} />
 			
 						<Route exact path="/admin/users" component={Users}/>
 
