@@ -5,52 +5,55 @@
     max-width: var(--maxWidth);
 }
 /******** Header Tool bar elements ********/
+
 #dashboard-toolBar {
     transition: width 0.3s, height 0.3s, left 0.3s, right 0.3s, top 0.3s, bottom 0.3s;
     position: relative;
     left: 0;
-    height: 72px;
+    height: 56px;
     min-height: var(--header-height, 40px);
-    border-radius: 0;
-    box-shadow: 0 1px 6px 0 rgba(179, 179, 179, .7);
+    box-shadow: 0 1px 6px 0 rgba(179, 179, 179, 0.571);
     overflow: hidden;
-    display: inline-block;
+    --background: #8c2332;
     flex-wrap: nowrap;
-    
+    padding-right: 8px;
+}
+
+#controller-back-button-icon {
+    color: white;
+}
+
+#menu-button {
+    display: none;
+    background-color: transparent;
+    border-right: 1px solid rgba(151, 149, 149, 0.319);
+    border-left: 1px solid rgba(151, 149, 149, 0.319);
+    height: 60%;
 }
 
 #scorevu-img {
     transition: width 0.3s, height 0.3s, left 0.3s, right 0.3s, top 0.3s, bottom 0.3s;
     cursor: pointer;
     color: grey;
-    height: 72px;
-    padding: 3px;
-    display: flex;
-    flex-wrap: nowrap;
+    height: 56px;
+    padding: 8px 10px 8px 14px;
 }
 
 #page-header-title {
-    color: grey;
-    position: relative;
-    display: flex;
-    flex-wrap: nowrap;
+    font-size: x-large;
+    color: white;
 }
 
-#create-user-btn {
-    cursor: pointer;
-    --border-width: 1px;
-    position: absolute;
-    margin: 10px;
-    right: 0;
+#fullscreen-button {
     text-transform: none;
 }
 
 #logout {
-    color: grey;
-    margin-right: 25px;
+    --color: white;
     cursor: pointer;
-    position: absolute;
-    right: 0;
+    display: block;
+    flex-wrap: nowrap;
+    align-items: end;
 }
 
 .secondary {
@@ -90,71 +93,70 @@
 }
 
 /******** Page elements ********/
-#dashboard-fullpage {
-    transition: padding 0.3s;
+.dashboard-fullpage {
+    transition: padding-left 0.3s;
     transition: width 0.3s, height 0.3s, left 0.3s, 
     right 0.3s, top 0.3s, bottom 0.3s;
-    padding-top: 72px;
+    padding-top: 56px;
     bottom: 0;
     padding-left: 48px;
     width:30%;
     height: 100%;
     position: fixed;
     overflow: hidden;
-    background-color: #1c1e21;
+    background-color: #8c2332;
+    background: #8c2332;
 }
 
+.dashboard-fullpage.collapse {
+    transition: padding-left 0.3s;
+    padding-left: 152px;
+}
 ::-webkit-scrollbar {
     width: 0px;   /*Remove scrollbar space */
     background: transparent;  /* Optional: just make scrollbar invisible */
 }
 
 #row-container {
-    padding: 1px 8px;
-    border-bottom: 2px solid grey;
-    display: flex;
     width: 100%;
-    position: relative;
+    height: 56px;
     align-items: center;
     transition: width 0.3s, height 0.3s, left 0.3s, 
     right 0.3s, top 0.3s, bottom 0.3s;
-    background-color: #1c1e21;
-}
-
-#menu-button {
-    display: none;
-    background-color: transparent;
-    margin: 0 0 0 -15px;
-    color: #fafafa;
-    border-right: 1px solid rgba(151, 149, 149, 0.319)
+    flex-wrap: nowrap;
 }
 
 #item-grid {
     overflow-y: scroll;
     scroll-behavior: smooth;
-    background-color: #18191a;
+    background-color: white;
     left: 0;
     transform: translate3d(0, 0, 0);
     height: inherit;
     transition: padding 0.3s;
     transition: width 0.3s, height 0.3s, left 0.3s, right 0.3s, top 0.3s, bottom 0.3s;
     width: 100%;
-    flex-wrap: nowrap;
+    padding: 40px 32px 0px;
+    display: grid;
+    align-items: stretch;
 }
 
-#layout-col {
+#item-main-row {
+    gap: 40px;
+    padding-bottom: 40px;
+}
+
+.main-grid-col-container {
     transition: width 0.3s, height 0.3s, padding 0.3s,
-     left 0.3s, right 0.3s, top 0.3s, bottom 0.3s;
+    left 0.3s, right 0.3s, top 0.3s, bottom 0.3s;
     background-color: #18191a;
     filter: brightness(150%);
     padding: 30px;
-    margin: 32px;
-    margin-right: 5%;
-    flex: 2 0 0;
     color: gray;
-    border-radius: 16px;
+    border-radius: 6px;
     box-shadow: 0 1px 6px 0 rgba(179, 179, 179, .3);
 }
+
 
 .expand-btn {
     cursor: pointer;
@@ -170,10 +172,10 @@
 .layout-col-item {
     transition: width 0.3s, height 0.3s, padding 0.3s,
     left 0.3s, right 0.3s, top 0.3s, bottom 0.3s;
-    box-shadow: 0 1px 6px 0 rgba(179, 179, 179, .3);
+    box-shadow: 0px 2px 4px 0px rgba(179, 179, 179, .3);
     padding: 30px;
     margin: 10px;
-    border-radius: 16px;
+    border-radius: 6px;
     filter: brightness(200%);
     cursor: pointer;
     color: gray;
@@ -185,63 +187,65 @@
     opacity: 0.4;
 }
 
-#media-col {
-    transition: height 0.3s, left 0.3s;
-    transition: width 0.3s, left 0.3s;
-    transition: padding 0.3s, left 0.3s;
+
+#media-item-grid {
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+    background-color: #8c2332;
+    left: 0;
+    transform: translate3d(0, 0, 0);
+    height: 100%;
+    transition: padding 0.3s;
+    transition: width 0.3s, height 0.3s, left 0.3s, right 0.3s, top 0.3s, bottom 0.3s;
+    width: 100%;
+    padding: 16px 0px;
+    display: grid;
+    align-items: stretch;
+}
+
+.media-img-container {
+    height: 80px;
+    width: 80px;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+}
+
+#media-item-card-content {
+    font-size: 8px;
+    padding: 2px;
+    line-height: 1;
+}
+
+/******** Device Box ********/
+.devices-table-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 32px 16px;
+}
+    
+.devices-table {
+    width: 100%;
+    height: 100%;
     background-color: #18191a;
-    filter: brightness(150%);
     color: gray;
-    box-shadow: 0 1px 6px 0 rgba(179, 179, 179, .3);
-    padding: 30px;
-    margin: 40px;
-    border-radius: 16px;
-}
-
-#device-col {
-    transition: padding 0.3s, left 0.3s;
-    transition: height 0.3s, left 0.3s;
-    transition: width 0.3s, left 0.3s;
-    background-color: #18191a;
-    filter: brightness(150%);
-    color: gray;
-    box-shadow: 0 1px 6px 0 rgba(179, 179, 179, .3);
-    padding: 30px;
-    margin: 34px;
-    margin-right: 5%;
-    flex: 2 0 0;
-    border-radius: 16px;
-
-}
-
-#device-col-item-container {
-    padding: 16px;
-}
-
-#device-col-items {
-    background-color: #18191a;
-    filter: brightness(150%);
-    color: gray;
-    border-radius: 16px;
-    padding: 0;
+    border-radius: 6px;
     box-shadow: 0 1px 6px 0 rgba(179, 179, 179, .3);
 }
 
-#device-col-header {
+.devices-th {
+    padding: 16px 0px;
+}
+
+.devices-td {
     text-align: center;
-}
-
-#sports-col {
-    transition: height 0.3s, left 0.3s;
-    transition: width 0.3s, left 0.3s;
-    transition: padding 0.3s, left 0.3s;
-    background-color: #18191a;
-    filter: brightness(150%);
-    color: gray;
-    padding: 30px;
-    margin: 40px;
-    border-radius: 16px;
-    box-shadow: 0 1px 6px 0 rgba(179, 179, 179, .3);
+    padding: 16px 0px;
+    background: #333;
+    border-bottom: 1px solid #8c2332;
+    color: white;
+    opacity: 0.5;
 }
 
 /******** Sidebar elements ********/
@@ -255,10 +259,8 @@
     z-index: 600;
     width: 48px;
     left: -152px;
-    background-color: #303030;
     transform: translate3d(0, 0, 0);
     height: auto;
-    border: 1px groove rgba(144, 143, 143, 0.274);
 }
 
 .nav-sidebar.active {
@@ -266,21 +268,32 @@
     width: 152px;
 } 
 
+.sidebar-content {
+    --background: #8c2332;
+}
+
 #menu-list {
     z-index: 590;
     padding: 0;
-    margin-bottom: 60px;
-    background-color: #222428;
+    margin-bottom: 56px;
+    background-color: #8c2332;
 }
 
 .menu-items {
-    --color: grey;
-    --background: #222428;
+    --color: white;
+    --background: #8c2332;
     text-transform: none;
-    margin-top: 8px;
-    margin-bottom: 8px;
+    margin-top: 4px;
+    margin-bottom: 10px;
     display: inline-block;
+    flex-wrap: nowrap;
+    width: 100%;
     box-shadow: 0 1px 4px 0 rgba(179, 179, 179, .3);
+}
+
+.menu-items.active{
+    --color: white;
+    --background: rgb(115, 113, 113);
 }
 
 #menu-items1 {
@@ -291,36 +304,36 @@
 }
 
 .menu-icons {
-    color: grey;
-    flex-shrink: 0;
+    color: white;
     padding-top: 14px;
     padding-bottom: 14px;
-    border-radius: 4px;
-    width: 18px;
-    height: 18px;
+    width: 16px;
+    height: 16px;
     cursor: pointer;
-    display: flex;
-    position: fixed;
 }
 
 .menu-labels {
-    font-size: 16px;
-    color: grey;
-    cursor: pointer;
-    padding: 48px;
-    padding-left: 8px;
-    padding-top: 16px;
-    padding-bottom: 16px;
-    border-radius: 4px;
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: start;
+    margin-left: 8px;
 }
 
 .menu-labels.collapsed {
-    padding-left: 16px;
-    transition: padding 0.3s;
+    border: 0;
+    clip: rect(0, 0, 0, 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
 }
 
 .expand-icon {
-    color: grey;
+    color: white;
     flex-shrink: 0;
     padding-top: 14px;
     padding-bottom: 14px;
@@ -335,7 +348,7 @@
 }
 
 #close-icon {
-    color: grey;
+    color: white;
     flex-shrink: 0;
     padding-top: 14px;
     padding-bottom: 14px;
@@ -349,10 +362,12 @@
 .expand-sidebar-button {
     position: fixed;
     bottom: 0;
-    --color: grey;
-    --background: #222428;
+    --color: white;
+    --background: #8c2332;
+    --border-radius: 0px;
     border-top: 2px groove rgba(144, 143, 143, 0.274);
     text-transform: none;
+    color: white;
 }
 
 .expand-sidebar-button.active {
@@ -361,7 +376,7 @@
 
 #collapse-label {
     font-size: 14px;
-    color: grey;
+    color: white;
     cursor: pointer;
     padding: 16px;
     padding-left: 8px;
@@ -379,38 +394,45 @@
     --color-hover: gold;
     margin-left: 16px;
     font-size: 15px;
-    color: grey;
+    color: white;
     padding-bottom: 1px;
     display: none;
 }
 
 #collapseIcon:hover, #cancel-button:hover, 
 #confirm-button:hover, .nav-sidebar:hover {
-    color: #1a83ff;
+    color: grey;
+}
+
+/*********** Media Queries ****************/
+@media only screen and (min-height: 1050px) {
+
 }
 
 @media only screen and (min-width: 1200px){
-    #dashboard-fullpage {
+    .dashboard-fullpage {
         padding-left: 48px;
         width: 100%;
         display: flex;
         flex-wrap: nowrap;
+        transition: padding-left 0.3s;
     }
 
     .nav-sidebar {
         left: 0px;
-        top: var(--header-height, 72px);
+        top: var(--header-height, 56px);
         width: 48px;
     }
 
     .nav-sidebar.active {
-        top: var(--header-height, 72px);
+        top: var(--header-height, 56px);
     }
 }
 
 @media only screen and (min-width: 768px) and (max-width: 1199px){
-    #dashboard-fullpage {
+    .dashboard-fullpage {
         padding-left: 48px;
+        transition: padding-left 0.3s;
         width: 100%;
         display: flex;
         flex-wrap: nowrap;
@@ -418,28 +440,28 @@
 
     .nav-sidebar {
         left: 0px;
-        top: var(--header-height, 72px);
+        top: var(--header-height, 56px);
         width: 48px;
         
     }
 
     .nav-sidebar.active {
-        top: var(--header-height, 72px);
+        top: var(--header-height, 56px);
         transition: width 0.3s, height 0.3s, left 0.3s, 
         right 0.3s, top 0.3s, bottom 0.3s;
         width: 152px;
     }
 }
 
-@media only screen and (max-width: 767.98px) {
+@media only screen and (max-width: 768px) {
     #dashboard-toolBar {
-        height: 60px;
+        height: 56px;
         width: 100%;
         flex-wrap: nowrap;
     }
 
     #scorevu-img {
-        height: 60px;
+        height: 56px;
     }
 
     #cancel-button, #confirm-button {
@@ -449,16 +471,16 @@
 
     #collapse-label {
         left: -152px;
-        top: var(--header-height, 60px);
+        top: var(--header-height, 56px);
     }
 
     .nav-sidebar {
         left: -152px;
-        top: var(--header-height, 60px);
+        top: var(--header-height, 56px);
     }
     
     .nav-sidebar.active {
-        top: var(--header-height, 60px);
+        top: var(--header-height, 56px);
         transition: width 0.3s, height 0.3s, left 0.3s, 
         right 0.3s, top 0.3s, bottom 0.3s;
     }
@@ -467,9 +489,10 @@
         display: none;
     }
 
-    #dashboard-fullpage {
+    .dashboard-fullpage {
         padding-left: 0px;
-        padding-top: 60px;
+        transition: padding-left 0.3s;
+        padding-top: 56px;
         width: 100%;
         display: flex;
         flex-wrap: nowrap;
@@ -483,7 +506,7 @@
         margin-left: 8px;
     }
 
-    #close-icon, #close-label, #menu-icons {
+    #close-icon, #close-label {
         display: flex;
     }
 
@@ -492,14 +515,29 @@
     }
 
     #page-header-title {
-        margin: auto;
-        margin-left: 1px;
-        margin-right: 10px;
-        padding-left: 15px;
-        font-size: x-large;
-        width: 100%;
-        display: flex;
-        flex-wrap: nowrap;
+        font-size: large;
     }
 }
 
+@media only screen and (max-width: 576px) {
+    #item-grid {
+        display: block;
+    }
+    
+    #controller-back-button {
+        width: 40px;
+    }
+
+    #menu-button {
+        width: 72px;
+    }
+
+    #fullscreen-button {
+        width: 72px;
+    }
+
+    #page-header-title {
+        font-size: 16px;
+        margin-right: 8px;
+    }
+}

@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { IonButton, IonCol, IonContent, IonGrid, IonHeader, IonIcon, IonItem, IonLabel, IonList, IonListHeader, IonPage, IonRow, IonTitle, IonToolbar, useIonAlert } from '@ionic/react';
-import { gridOutline, imageOutline, peopleOutline, basketballOutline, homeOutline, closeOutline, expandOutline, chevronForward, menuOutline } from 'ionicons/icons';
+import { gridOutline, imageOutline, peopleOutline, basketballOutline, homeOutline, closeOutline, expandOutline, chevronForward, menuOutline, powerOutline } from 'ionicons/icons';
 import ReactDOM from 'react-dom';
 import { useHistory } from "react-router-dom";
 import axios from 'axios';
+import logo from './macewan.PNG'
 import './Dashboard.css';
 //import Controller from '../components/controller.js';
 //axios.defaults.withCredentials = true;
-const lightVuLogo = 'https://portal.lightvu.com/assets/lv_portal_logo.png'
-const scoreVulogo = 'http://www.scorevu.com/images/scorevu_logo.svg'
-const defaultUsrImg = 'https://cdn.icon-icons.com/icons2/1674/PNG/512/personadd_111023.png'
+const macewanLogo = logo
 
 const Dashboard = () => {
 	
@@ -97,13 +96,13 @@ const Dashboard = () => {
 							<IonIcon slot='icon-only' icon={menuOutline}></IonIcon>
 						</IonButton>
 
-						<a href='dashboard'> <img id="scorevu-img" src={scoreVulogo} alt="ScoreVu"></img>	</a>
+						<a href='dashboard'> <img id="scorevu-img" src={macewanLogo}></img>	</a>
 
 						<h1 id='page-header-title' >Dashboard</h1>
 
-						<IonButton id='create-user-btn' expand='block' fill='outline' color="medium" size='small'>Create  User</IonButton>
+						{/* <IonButton id='create-user-btn' expand='block' fill='outline' color="medium" size='small'>Create  User</IonButton> */}
 
-						<IonLabel >
+						{/* <IonLabel >
 							<a id='logout' onClick={() => presentAlert({
 								cssClass: 'secondary',
 								header: 'Log out',
@@ -121,7 +120,26 @@ const Dashboard = () => {
 								})}>
 								Log out
 							</a>
-						</IonLabel>
+						</IonLabel> */}
+
+						<IonButton /* key={topButtons?.length ?? 0} */ data-tip data-for="logout-tooltip" size='small' id='logout' fill='clear'
+							onClick={() => presentAlert({
+								cssClass: 'secondary',
+								header: 'Log out',
+								subHeader: 'Are you sure you want to log out?',
+								buttons: [{
+									text: 'No',
+									role: 'cancel',
+									id: 'cancel-button',
+								},
+								{
+									text: 'Yes',
+									id: 'confirm-button',
+									handler: () => window.location.replace('/login')
+								}],
+								})}>
+							<IonIcon slot='icon-only' icon={powerOutline} size='small'></IonIcon>
+						</IonButton>
 						
 					</IonRow>
 
@@ -131,7 +149,7 @@ const Dashboard = () => {
 					
 					<aside aria-label='Project navigation' className={sidebar ? 'nav-sidebar active' : 'nav-sidebar'}>
 							
-						<IonContent color= "dark">
+						<IonContent className='sidebar-content'>
 
 							<IonList id='menu-list' color= "dark">
 								
@@ -142,22 +160,22 @@ const Dashboard = () => {
 
 								<IonButton className='menu-items' onClick={() => { }}>
 									<IonIcon className={getWindowDimensions() < 768 ? 'menu-icons-mobile': 'menu-icons'} icon={peopleOutline} size='small'></IonIcon>	
-									<IonLabel className={sidebar ? 'menu-labels' : 'menu-labels collapsed' }>Admin</IonLabel>
+									<IonLabel className={sidebar ? 'menu-labels' : 'menu-labels collapsed' }>Users</IonLabel>
 								</IonButton>
 
 								<IonButton className='menu-items' onClick={() => { }}>
 									<IonIcon className={getWindowDimensions() < 768 ? 'menu-icons-mobile': 'menu-icons'} icon={gridOutline} size='small'></IonIcon>	
-									<IonLabel className={sidebar ? 'menu-labels' : 'menu-labels collapsed' }>Layouts</IonLabel>
+									<IonLabel className={sidebar ? 'menu-labels' : 'menu-labels collapsed' }>Courses</IonLabel>
 								</IonButton>
 
 								<IonButton className='menu-items' onClick={() => { }}>
 									<IonIcon className={getWindowDimensions() < 768 ? 'menu-icons-mobile': 'menu-icons'} icon={imageOutline} size='small'></IonIcon>	
-									<IonLabel className={sidebar ? 'menu-labels' : 'menu-labels collapsed' }>Media</IonLabel>
+									<IonLabel className={sidebar ? 'menu-labels' : 'menu-labels collapsed' }>Lorem</IonLabel>
 								</IonButton>
 
 								<IonButton className='menu-items' onClick={() => { }}>
 									<IonIcon className={getWindowDimensions() < 768 ? 'menu-icons-mobile': 'menu-icons'} icon={basketballOutline} size='small'></IonIcon>	
-									<IonLabel className={sidebar ? 'menu-labels' : 'menu-labels collapsed' }>Sports</IonLabel>
+									<IonLabel className={sidebar ? 'menu-labels' : 'menu-labels collapsed' }>Lorem</IonLabel>
 								</IonButton>
 
 							</IonList>
@@ -174,7 +192,7 @@ const Dashboard = () => {
 					
 						<IonGrid id='item-grid'>
 								
-							<IonRow id='item-main-row'> 
+							{/* <IonRow id='item-main-row'> 
 								<IonCol id='layout-col'>
 									
 									<div>
@@ -253,7 +271,7 @@ const Dashboard = () => {
 									</div>
 
 								</IonCol>
-							</IonRow>
+							</IonRow> */}
 						</IonGrid>
 								
 				</div>
