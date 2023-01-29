@@ -27,14 +27,11 @@ class API {
         app.use(cors());
         app.use('/', router);
 
-        /* console.log(database.authenticateStudent('Aaron', 'Alejo').then(res => {
-                 console.log(res);
-            })
-        ); */
-        this.database.authenticateStudent('Aaron', 'Alejo', status => {
+        
+        /* this.database.authenticateStudent('Aaron', 'Alejo', status => {
             //response.json({ success: status });
             console.log(status);
-        });
+        }); */
 
         /* dbOperations.getStudents().then(res => {
             console.log(res.recordset);
@@ -76,11 +73,26 @@ class API {
         //console.log(body);
         // Check if the request body is valid and if the email/password are valid.
         if (!body || !body.email || !body.password) return;
-        //console.log("handleLoginAPi");
+        
+        this.database.authenticateStudent('Aaron', 'Alejo').then(res => {
+            console.log(res.recordset);
+            // Compares inputted password to the from DB.
+            //console.log(res.recordset[0].last_name)
+            if('Alejo' !== res?.recordset[0].last_name) {
+               console.log(false);
+               response.json({ success: false });
+            } else{
+               console.log(true);
+               response.json({ success: true });
+            }
+           
+       });
+
         // Attempt to authenticate and respond with the database status.
-        this.database.authenticateStudent(body.email, body.password, status => {
+        /* this.database.authenticateStudent(body.email, body.password, status => {
+            
             response.json({ success: status });
-        });
+        }); */
     }
     
 }
