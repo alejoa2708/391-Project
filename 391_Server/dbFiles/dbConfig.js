@@ -1,13 +1,13 @@
 const config = {
-    user: 'test',       //Has to be changed to your machine 
-    password: 'foo',    //Has to be changed to your machine 
-    server: 'DOM',      //Has to be changed to your machine 
+    user: 'tadrosv',       //Has to be changed to your machine 
+    password: 'santander515',    //Has to be changed to your machine 
+    server: 'DESKTOP-DMB6OF8',      //Has to be changed to your machine 
     database: '391',    //Has to be changed to your machine 
     options: {
         trustServerCertificate: true,
         trustConnectionL: false,
         enableAirthAbort: true,
-        instancename: 'Aero4'   //Has to be changed to your machine
+        instancename: 'victo'   //Has to be changed to your machine
                                 //Name after the / when viewing server properties 
     },
     port: 1433
