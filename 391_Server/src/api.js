@@ -1,15 +1,10 @@
 const express = require('express');
 const Router = express.Router;
-const Request = express.Request;
-const Response = express.Response;
-const dbOperations = require('./dbFiles/dpOperation');
-const Student = require('./dbFiles/student');
 const bodyParser = require('body-parser');
 const json = bodyParser.json;
 const urlencoded = bodyParser.urlencoded;
 const cors = require('cors');
 
-const dbTest = require('./database/database');
 class API {
     
     constructor(database) {
@@ -27,7 +22,6 @@ class API {
         app.use(cors());
         app.use('/', router);
 
-        
         /* this.database.authenticateStudent('Aaron', 'Alejo', status => {
             //response.json({ success: status });
             console.log(status);
@@ -70,19 +64,22 @@ class API {
      */
     handleLogin(request, response) {
         let body = request.body;
-        //console.log(body);
+        
         // Check if the request body is valid and if the email/password are valid.
         if (!body || !body.email || !body.password) return;
         
-        this.database.authenticateStudent('Aaron', 'Alejo').then(res => {
-            console.log(res.recordset);
-            // Compares inputted password to the from DB.
-            //console.log(res.recordset[0].last_name)
-            if('Alejo' !== res?.recordset[0].last_name) {
-               console.log(false);
+        this.database.authenticateStudent(body.email, body.password).then(res => {
+            
+            if(res?.recordset.length === 0){ 
+                response.json({success: false});
+                return
+            };
+            
+            if(body.password !== res?.recordset[0].last_name) {
+               //console.log(false);
                response.json({ success: false });
             } else{
-               console.log(true);
+               //console.log(true);
                response.json({ success: true });
             }
            

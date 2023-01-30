@@ -3,12 +3,7 @@ import { IonButton, IonCol, IonContent, IonGrid, IonHeader, IonIcon, IonItem, Io
 import { gridOutline, imageOutline, peopleOutline, basketballOutline, homeOutline, closeOutline, expandOutline, chevronForward, menuOutline, powerOutline } from 'ionicons/icons';
 import ReactDOM from 'react-dom';
 import { useHistory } from "react-router-dom";
-import axios from 'axios';
-import logo from './macewan.PNG'
 import './Dashboard.css';
-//import Controller from '../components/controller.js';
-//axios.defaults.withCredentials = true;
-const macewanLogo = logo
 
 const Dashboard = () => {
 	
@@ -96,7 +91,7 @@ const Dashboard = () => {
 							<IonIcon slot='icon-only' icon={menuOutline}></IonIcon>
 						</IonButton>
 
-						<a href='dashboard'> <img id="scorevu-img" src={macewanLogo}></img>	</a>
+						<a href='dashboard'> <img id="scorevu-img" src={process.env.PUBLIC_URL + '/macewan.PNG'} alt="macewan"></img>	</a>
 
 						<h1 id='page-header-title' >Dashboard</h1>
 

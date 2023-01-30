@@ -17,7 +17,7 @@ class Database {
     getStudents = async() => {
         try{
             let pool = await this.sql.connect(this.config);
-            let student = pool.request().query("SELECT * from dbo.Student WHERE first_name='Aaron'")
+            let student = pool.request().query("SELECT * from dbo.Student");
             //console.log(student);
             return student;
         }
@@ -32,6 +32,29 @@ class Database {
      * @param password Rawtext password of the user.
      */
     authenticateStudent = async(email, password, callback) => {
+
+        try{
+            let pool = await this.sql.connect(this.config);
+            let data = pool.request().query("SELECT * FROM Student WHERE first_name=" + "'" + email + "'");
+            //console.log(data);
+            
+            return data;
+            /* if (data.length === 0) return callback?.(false);
+
+            // There can only be one user, so grab the first one.
+            //let user = data.shift();
+            
+            // Compares inputted password to the from DB.
+            if(password !== data?.last_name) {
+                return callback?.(false);
+              }
+            return callback?.(true); */
+            //return student;
+        }
+        catch(err){
+            console.log(err)
+        }
+
         // Get all users with the specified email.
         /* let pool = await this.sql.connect(this.config);
         pool.request().query("SELECT * FROM Student WHERE first_name=" + "'" + email + "'", (results) => {
@@ -50,45 +73,24 @@ class Database {
               callback?.(true);
               
         }); */
-
-        try{
-            let pool = await this.sql.connect(this.config);
-            let data = pool.request().query("SELECT * FROM Student WHERE first_name=" + "'" + email + "'");
-            //console.log(data);
-            
-            return data;
-            if (data.length === 0) return callback?.(false);
-
-            // There can only be one user, so grab the first one.
-            //let user = data.shift();
-            
-            // Compares inputted password to the from DB.
-            if(password !== data?.last_name) {
-                return callback?.(false);
-              }
-            return callback?.(true);
-            //return student;
-        }
-        catch(err){
-            console.log(err)
-        }
     }
-
-    // query(queryString, callback) {
-    //     try {
-    //         this.create();
     
-    //         if (this.connection) {
-    //             this.connection.query(this.sanitizer.sanitize(queryString), (error, results, fields) => {
-    //                 if (error) throw error;
-    //                 if (callback) callback(results, fields);
-    //             });
-    //         }
-    //         this.close();
-    //     } catch (error) {
-    //         console.log(error);
-    //     }
-    // }
+
+    /* query(queryString, callback) {
+        try {
+            this.create();
+    
+            if (this.connection) {
+                this.connection.query(this.sanitizer.sanitize(queryString), (error, results, fields) => {
+                    if (error) throw error;
+                    if (callback) callback(results, fields);
+                });
+            }
+            this.close();
+        } catch (error) {
+            console.log(error);
+        }
+    } */
     
 
     /**
