@@ -3,8 +3,7 @@ import React from 'react';
 import { IonButton, IonContent, IonInput, IonItem, IonLabel, IonPage } from '@ionic/react';
 import './Login.css';
 import ReactDOM from 'react-dom';
-import Helper from './helper';
-import { RouteComponentProps, useHistory } from "react-router-dom";
+import Helper from '../helper';
 
 
 function Login() {
@@ -34,11 +33,12 @@ function Login() {
 		console.log(password);
 	}
 
+	/**
+	 * Sign in button event handler. Takes user inputs (username
+	 * and password) and sends a POST request to authenticate log in info.
+	 * @return An error message or none
+	 */
 	function onLoginButton() {
-		console.log(email);
-		console.log(password);
-	  
-		//let { email, password } = this;
 	  
 		if (email.length < 3) {
 		  return sendError('The email you have entered is invalid.');
@@ -47,17 +47,13 @@ function Login() {
 		if (password.length < 3) {
 		  return sendError('The password you have entered is invalid.');
 		}
-		console.log('here1');
+
 		Helper.post(Helper.getAPIUrl('login'), { email, password }).then(response => {
-			console.log('here2');
 			if (!response || !response.data || !response.data.success) {
 			return sendError('The credentials you have entered are invalid.');
 		  }
-		  console.log(response);
-		  console.log('here3');
-		  //Helper.setUserId(response.data.userId);
+		  
 		  //props.history.push('/dashboard');
-		  console.log('here4');
 		  window.location.replace('/dashboard');
 		});
 	}
