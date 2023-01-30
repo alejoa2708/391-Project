@@ -23,8 +23,8 @@ import '@ionic/react/css/text-transformation.css';
 import '@ionic/react/css/flex-utils.css';
 import '@ionic/react/css/display.css';
 
-import Login from './/Login';
-import Dashboard from './/Dashboard';
+import Login from './pages/Login';
+import Dashboard from './pages/Dashboard';
 
 setupIonicReact();
 
