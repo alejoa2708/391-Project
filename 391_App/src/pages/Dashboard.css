@@ -54,6 +54,7 @@
     display: block;
     flex-wrap: nowrap;
     align-items: end;
+    margin-left: auto;
 }
 
 .secondary {

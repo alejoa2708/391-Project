@@ -79,7 +79,7 @@ function Login() {
 					<div id='content-wrapper' className='float'>
 						<div id='login-content'>
 							<div className='header'>
-								<img src={moImg}></img>
+								<img src={moImg} alt=''></img>
 							</div>
 							<div className='login-box'>
 								<div id='upper-box-wrapper'>

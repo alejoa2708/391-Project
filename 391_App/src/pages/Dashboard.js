@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { IonButton, IonCol, IonContent, IonGrid, IonHeader, IonIcon, IonItem, IonLabel, IonList, IonListHeader, IonPage, IonRow, IonTitle, IonToolbar, useIonAlert } from '@ionic/react';
-import { gridOutline, imageOutline, peopleOutline, basketballOutline, homeOutline, closeOutline, expandOutline, chevronForward, menuOutline, powerOutline } from 'ionicons/icons';
+import React, { useState } from 'react';
+import { IonButton, IonContent, IonGrid, IonIcon, IonLabel, IonList, IonPage, IonRow, IonToolbar, useIonAlert } from '@ionic/react';
+import { gridOutline, imageOutline, peopleOutline, basketballOutline, homeOutline, closeOutline, chevronForward, menuOutline, powerOutline } from 'ionicons/icons';
 import ReactDOM from 'react-dom';
 import { useHistory } from "react-router-dom";
 import './Dashboard.css';
@@ -57,7 +57,7 @@ const Dashboard = () => {
 		return width
 	}
 
-	function  routeChange() { 
+	function routeChange() { 
 		let path = '/controller'; 
 		history.push(path);
 		window.location.reload();
@@ -67,39 +67,19 @@ const Dashboard = () => {
 	 * Gets the list of items from API response and stores the data into layout item holder 
 	 * for displaying in current viewport
 	 */ 
-	// useEffect(()=>{
+	/* useEffect(()=>{
 		
-	// 	axios.get('http://192.168.1.173:9091/api/v1/layouts', {withCredentials: true})
-	// 	  .then(res=>{
-	// 		//console.log(res.data);
-	// 		setLayout(res.data);
-	// 		//console.log(layoutItems);
-	// 	  })
-	// 	  .catch(err=>{
-	// 		console.log(err);
-	// 	  })
-	//  }, [])
+		axios.get('http://192.168.1.173:9091/api/v1/layouts')
+		  .then(res=>{
+			//console.log(res.data);
+			setLayout(res.data);
+			//console.log(layoutItems);
+		  })
+		  .catch(err=>{
+			console.log(err);
+		  })
+	 }, []) */
 
-	let tempData = ['control', 'layout', 'scoreboard', 'test'] // Hardcoded data for when API is down
-	 /**
-	  * Maps all the items from layout items holder and creates HTML for each item
-	  * @returns an HTML element to be used to display each layout item
-	  */
-	 //console.log(layoutItems);
-	 const items = tempData.map((layoutItem, index)=>{
-		if (layoutItem === 'control'){
-			return  ( <IonCol className='layout-col-item' key={index} onClick={routeChange}>
-						{layoutItem} 
-					</IonCol >);
-		}
-
-		else {
-			return (<IonCol className='layout-col-item' key={index} onClick={() => console.log("It's clicking")}>
-						{layoutItem} 
-					</IonCol >);
-		}
-		  
-	})
 
 	/**
 	 * Send error of parameter 'message' to the 'errorMessage' in 
@@ -125,28 +105,6 @@ const Dashboard = () => {
 						<a href='dashboard'> <img id="scorevu-img" src={process.env.PUBLIC_URL + '/macewan.PNG'} alt="macewan"></img>	</a>
 
 						<h1 id='page-header-title' >Dashboard</h1>
-
-						{/* <IonButton id='create-user-btn' expand='block' fill='outline' color="medium" size='small'>Create  User</IonButton> */}
-
-						{/* <IonLabel >
-							<a id='logout' onClick={() => presentAlert({
-								cssClass: 'secondary',
-								header: 'Log out',
-								subHeader: 'Are you sure you want to log out?',
-								buttons: [{
-									text: 'No',
-									role: 'cancel',
-									id: 'cancel-button',
-								},
-								{
-									text: 'Yes', 
-									id: 'confirm-button',
-									handler: () => window.location.replace('/login') 
-								}],
-								})}>
-								Log out
-							</a>
-						</IonLabel> */}
 
 						<IonButton /* key={topButtons?.length ?? 0} */ data-tip data-for="logout-tooltip" size='small' id='logout' fill='clear'
 							onClick={() => presentAlert({
@@ -217,100 +175,7 @@ const Dashboard = () => {
 					</aside>
 					
 						<IonGrid id='item-grid'>
-							{students.length > 0 && <div>
-								<TableGrid
-									rows={students.map((item) => item)}
-									headers={['ID','First Name','Last Name', 'Gender']}
-									headerStyle={{backgroundColor: 'gray'}}
-        							rowStyle={{backgroundColor: 'white'}}
-								/>
-							</div>}
-							{students.length > 0 && rows
-							&& <div style={{ height: 700, width: '100%' }}>
-								<DataGrid rows={rows} columns={columns}/>
-							</div>
-							}
-								
-							{/* <IonRow id='item-main-row'> 
-								<IonCol id='layout-col'>
-									
-									<div>
-										<IonTitle>
-											Layout box
-											<IonIcon className='expand-btn' icon={expandOutline} size='small'></IonIcon>
-										</IonTitle>
-									</div>
-									
-									<IonRow id='layout-items-row'>
-
-										{items}
-										
-									</IonRow>
-								</IonCol>
-
-								<IonCol id='media-col'>
-									<div>
-										<IonTitle>
-											Media box?
-											<IonIcon className='expand-btn' icon={expandOutline} size='small'></IonIcon>
-										</IonTitle>
-									</div>
-								</IonCol>
-							</IonRow>
-
 							
-							<IonRow onClick={() => console.log(getWindowDimensions())}>
-								<IonCol id='device-col'>
-									
-
-									<div>
-										<IonTitle>
-											Device box
-											<IonIcon className='expand-btn' icon={expandOutline} size='small'></IonIcon>
-										</IonTitle>
-									</div>
-
-									<div id='device-col-item-container'>
-										<IonList id='device-col-items'>
-											<IonListHeader id='device-col-header'>
-												<IonLabel>Name</IonLabel>
-												<IonLabel>Layout</IonLabel>
-												<IonLabel>HB?</IonLabel>
-											</IonListHeader>
-										
-											<IonItem color='dark'>
-												<IonLabel>Pokémon Yellow</IonLabel>
-												<IonLabel>Pokémon Yellow</IonLabel>
-												<IonLabel>Pokémon Yellow</IonLabel>
-											</IonItem>
-											<IonItem color='dark'>
-												<IonLabel>Mega Man X</IonLabel>
-											</IonItem>
-											<IonItem color='dark'>
-												<IonLabel>The Legend of Zelda</IonLabel>
-											</IonItem>
-											<IonItem color='dark'>
-												<IonLabel>Pac-Man</IonLabel>
-											</IonItem>
-											<IonItem color='dark'>
-												<IonLabel>Super Mario World</IonLabel>
-											</IonItem>
-										</IonList>
-									</div>
-									
-								</IonCol>
-								
-								<IonCol id='sports-col'>
-									
-									<div>
-										<IonTitle>
-											Sports box?
-											<IonIcon className='expand-btn' icon={expandOutline} size='small'></IonIcon>
-										</IonTitle>
-									</div>
-
-								</IonCol>
-							</IonRow> */}
 						</IonGrid>
 								
 				</div>
