@@ -5,6 +5,8 @@ import ReactDOM from 'react-dom';
 import { useHistory } from "react-router-dom";
 import './Dashboard.css';
 import Helper from '../helper';
+import { TableGrid } from 'ionic-react-tablegrid';
+import { DataGrid } from '@mui/x-data-grid';
 
 const Dashboard = () => {
 	
@@ -13,20 +15,34 @@ const Dashboard = () => {
 	const [sidebar, setSidebar] = useState(false);	// Sets nav side bar state to false (closed)
 	const showSidebar = () => setSidebar(!sidebar); // Triggering sidebar to expand
 	const [students, setStudents] = useState({});
+	const [rows, setRows] = useState([]);
 	const history = useHistory();
 
 	useEffect(() => {
 		Helper.post(Helper.getAPIUrl('getStudents'), {}).then(response => {
-			console.log(response);
-		})
-		.catch((error) => {
-			console.error(error);
-		})
-	})
+			//console.log(response.data.recordsets[0]);
+			setStudents(response.data.recordsets[0]);
+		});
+	}, []);
 
-	if(students) {
-		console.log(students)
-	}
+	useEffect(() => {
+		if(students.length > 0) {
+			const data = [];
+			students.map((item) => 
+				data.push({ id: item.s_id, first_name: item.first_name, last_name: item.last_name, gender: item.gender })
+			);
+			setRows(data);
+		}
+	}, [students])
+
+	
+
+	const columns = [
+		{ field: 'id', headerName: 'ID', width: 150 },
+		{ field: 'first_name', headerName: 'First Name', width: 150 },
+		{ field: 'last_name', headerName: 'Last Name', width: 150 },
+		{ field: 'gender', headerName: 'Gender', width: 150 },
+	]
 
 	function onSelectMenu (elementId){
 		document.getElementById(elementId)?.setAttribute("id", "menu-items1");
@@ -201,9 +217,19 @@ const Dashboard = () => {
 					</aside>
 					
 						<IonGrid id='item-grid'>
-							<div>
-								hello
+							{students.length > 0 && <div>
+								<TableGrid
+									rows={students.map((item) => item)}
+									headers={['ID','First Name','Last Name', 'Gender']}
+									headerStyle={{backgroundColor: 'gray'}}
+        							rowStyle={{backgroundColor: 'white'}}
+								/>
+							</div>}
+							{students.length > 0 && rows
+							&& <div style={{ height: 700, width: '100%' }}>
+								<DataGrid rows={rows} columns={columns}/>
 							</div>
+							}
 								
 							{/* <IonRow id='item-main-row'> 
 								<IonCol id='layout-col'>

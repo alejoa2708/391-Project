@@ -133,19 +133,12 @@ class API {
      * 
      * @param response Response to the client indicating the success status.
      */
-    getStudents(response) {
+    getStudents(request, response) {
+        let body = request.body;
             
         this.database.getStudents().then(res => {
-                
-            if(res?.recordset.length === 0){ 
-                console.log("wtf is going on")
-                response.json({success: false});
-                return;
-            } else {
-                console.log(res.recordset)
-                return;
-            }
-               
+            console.log(res);
+            response.json(res);
         });
     }
     
