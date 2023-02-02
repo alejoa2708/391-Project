@@ -139,10 +139,10 @@ class API {
                 
             if(res?.recordset.length === 0){ 
                 response.json({success: false});
-                return
+                return;
             } else {
-                //response.json({ success: true });
-                return
+                console.log(res.recordset)
+                return res.recordset;
             }
                
         });
