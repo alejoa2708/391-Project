@@ -46,6 +46,7 @@ class API {
         //router.post('/register', this.handleRegistration.bind(this));
         router.post('/login', this.handleLogin.bind(this));
         //router.post('/uservalid', this.handleUserValid.bind(this));
+        router.get('/getStudents', this.getStudents.bind(this));
     }
 
     /**
@@ -90,6 +91,61 @@ class API {
             
             response.json({ success: status });
         }); */
+    }
+
+
+        /**
+     * Check if the credentials are correct and authenticate login.
+     * @param request Request body contains the username and password.
+     * @param response Response to the client indicating the success status.
+     */
+    handleLogin(request, response) {
+        let body = request.body;
+        
+        // Check if the request body is valid and if the email/password are valid.
+        if (!body || !body.email || !body.password) return;
+        
+        this.database.authenticateStudent(body.email, body.password).then(res => {
+            
+            if(res?.recordset.length === 0){ 
+                response.json({success: false});
+                return
+            };
+            
+            if(body.password !== res?.recordset[0].last_name) {
+               //console.log(false);
+               response.json({ success: false });
+            } else{
+               //console.log(true);
+               response.json({ success: true });
+            }
+           
+       });
+
+        // Attempt to authenticate and respond with the database status.
+        /* this.database.authenticateStudent(body.email, body.password, status => {
+            
+            response.json({ success: status });
+        }); */
+    }
+
+    /**
+     * 
+     * @param response Response to the client indicating the success status.
+     */
+    getStudents(response) {
+            
+        this.database.getStudents().then(res => {
+                
+            if(res?.recordset.length === 0){ 
+                response.json({success: false});
+                return
+            } else {
+                //response.json({ success: true });
+                return
+            }
+               
+        });
     }
     
 }

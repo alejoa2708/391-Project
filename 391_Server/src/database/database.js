@@ -17,7 +17,7 @@ class Database {
     getStudents = async() => {
         try{
             let pool = await this.sql.connect(this.config);
-            let student = pool.request().query("SELECT * from dbo.Student");
+            let student = pool.request().query("SELECT * from Student");
             //console.log(student);
             return student;
         }
@@ -36,7 +36,7 @@ class Database {
         try{
             let pool = await this.sql.connect(this.config);
             let data = pool.request().query("SELECT * FROM Student WHERE first_name=" + "'" + email + "'");
-            //console.log(data);
+            console.log(data);
             
             return data;
             /* if (data.length === 0) return callback?.(false);
