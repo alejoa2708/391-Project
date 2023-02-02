@@ -16,8 +16,8 @@ const Dashboard = () => {
 	const history = useHistory();
 
 	useEffect(() => {
-		Helper.get(Helper.getAPIUrl('getStudents')).then(response => {
-			setStudents(response);
+		Helper.post(Helper.getAPIUrl('getStudents'), {}).then(response => {
+			console.log(response);
 		})
 		.catch((error) => {
 			console.error(error);

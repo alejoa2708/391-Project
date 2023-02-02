@@ -46,7 +46,7 @@ class API {
         //router.post('/register', this.handleRegistration.bind(this));
         router.post('/login', this.handleLogin.bind(this));
         //router.post('/uservalid', this.handleUserValid.bind(this));
-        router.get('/getStudents', this.getStudents.bind(this));
+        router.post('/getStudents', this.getStudents.bind(this));
     }
 
     /**
@@ -138,11 +138,12 @@ class API {
         this.database.getStudents().then(res => {
                 
             if(res?.recordset.length === 0){ 
+                console.log("wtf is going on")
                 response.json({success: false});
                 return;
             } else {
                 console.log(res.recordset)
-                return res.recordset;
+                return;
             }
                
         });
