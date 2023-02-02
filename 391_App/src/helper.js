@@ -1,8 +1,6 @@
-//import { Storage } from '@capacitor/storage';
 import axios from 'axios';
 
 export default class Helper {
-    // Remote server host - 192.64.116.116
     static apiHost = '127.0.0.1';
     static apiPort = 5000;
 
@@ -35,8 +33,6 @@ export default class Helper {
      */
 
     static getAPIUrl(request) {
-        // let response = `http://${Helper.apiHost}:${Helper.apiPort}/${request}`;
-        // console.log(response);
         return `http://${Helper.apiHost}:${Helper.apiPort}/${request}`;
     }
 

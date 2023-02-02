@@ -26,6 +26,7 @@ body
     width:100%;
     height:100%;
     background-color:inherit;
+    padding: 10px;
 }
 
 #branding-wrapper {
@@ -43,6 +44,7 @@ body
     background-image: url("https://bpb-ca-c1.wpmucdn.com/sites.macewan.ca/dist/c/1/files/2020/05/cropped-MacEwan-University.jpg");
     border-top-right-radius: 10%;
     border-bottom-right-radius: 10%;
+    border-radius: 41px 340px;
 } 
 
 #branding {
@@ -223,7 +225,7 @@ body
 
 /************** Media Queries **************/
 /* Stolen from https://portal.lightvu.com/. Form factor: intermediate height layout. Reduce space of the header. */
-@media only screen and (max-height: 820px) {
+@media only screen and (max-height: 680px) {
     .header {
         padding-top: 12px;
         margin-bottom: 32px;
