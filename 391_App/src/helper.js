@@ -16,6 +16,16 @@ export default class Helper {
         }
     }
 
+    static get(url) {
+        try {
+            let response = axios.get(url);
+            console.log(response)
+            return response;
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
     /**
      * Grabs the `userId` from the storage.
      * @returns Promise of the `userId` string.

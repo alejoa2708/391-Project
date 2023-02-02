@@ -4,6 +4,7 @@ import { gridOutline, imageOutline, peopleOutline, basketballOutline, homeOutlin
 import ReactDOM from 'react-dom';
 import { useHistory } from "react-router-dom";
 import './Dashboard.css';
+import Helper from '../helper';
 
 const Dashboard = () => {
 	
@@ -11,7 +12,20 @@ const Dashboard = () => {
 	const [layoutItems, setLayout] = useState([]);  // layout item holder
 	const [sidebar, setSidebar] = useState(false);	// Sets nav side bar state to false (closed)
 	const showSidebar = () => setSidebar(!sidebar); // Triggering sidebar to expand
+	const [students, setStudents] = useState({});
 	const history = useHistory();
+
+	useEffect(() => {
+		Helper.get(Helper.getAPIUrl('getStudents')).then(response => {
+			if (!response) {
+				console.log("dont have it")
+			}
+			console.log("found it")
+		})
+		.catch((error) => {
+			console.error(error);
+		})
+	})
 
 	function onSelectMenu (elementId){
 		document.getElementById(elementId)?.setAttribute("id", "menu-items1");
@@ -186,6 +200,9 @@ const Dashboard = () => {
 					</aside>
 					
 						<IonGrid id='item-grid'>
+							<div>
+								hello
+							</div>
 								
 							{/* <IonRow id='item-main-row'> 
 								<IonCol id='layout-col'>
