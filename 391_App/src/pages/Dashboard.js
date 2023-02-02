@@ -17,15 +17,16 @@ const Dashboard = () => {
 
 	useEffect(() => {
 		Helper.get(Helper.getAPIUrl('getStudents')).then(response => {
-			if (!response) {
-				console.log("dont have it")
-			}
-			console.log("found it")
+			setStudents(response);
 		})
 		.catch((error) => {
 			console.error(error);
 		})
 	})
+
+	if(students) {
+		console.log(students)
+	}
 
 	function onSelectMenu (elementId){
 		document.getElementById(elementId)?.setAttribute("id", "menu-items1");

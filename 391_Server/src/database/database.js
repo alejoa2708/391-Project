@@ -17,7 +17,7 @@ class Database {
     getStudents = async() => {
         try{
             let pool = await this.sql.connect(this.config);
-            let student = pool.request().query("SELECT * from Student");
+            let student = pool.request().query("SELECT * FROM dbo.Student");
             //console.log(student);
             return student;
         }
