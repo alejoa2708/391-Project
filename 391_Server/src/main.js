@@ -3,7 +3,7 @@ const Database = require('./database/database');
 
 class Main {
     // Create a database object.
-    database = new Database();;
+    database = new Database();
     api;
 
     constructor() {
