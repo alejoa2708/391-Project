@@ -2,7 +2,6 @@ import logo from './logo.svg';
 import '@ionic/react/css/core.css';
 import './App.css';
 import React from 'react';
-import { IonToolbar, IonButtons, IonMenuButton, IonTitle } from '@ionic/react';
 import { Redirect, Route } from 'react-router-dom';
 import {IonApp, IonRouterOutlet, setupIonicReact} from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
@@ -32,32 +31,16 @@ const App = () => {
   return (
     
       <IonApp>
-				<IonReactRouter>
-					<IonRouterOutlet>
-						<Route path="/login" component={Login} />
-						<Redirect exact from="/" to="/login" />
+			<IonReactRouter>
+				<IonRouterOutlet>
+					<Route path="/login" component={Login} />
+					<Redirect exact from="/" to="/login" />
 
-						<Route exact path="/dashboard" component={Dashboard} />
-						
-						{/* <Route exact path="/admin" component={Admin} />
-			
-						<Route exact path="/admin/users" component={Users}/>
+					<Route exact path="/dashboard" component={Dashboard} />
 
-						<Route exact path="/admin/createUser" component={CreateUser}/>
-
-						<Route exact path="/admin/userProfile" component={UserProfile}/>
-						
-						<Route exact path="/layouts" component={Layouts} />
-
-						<Route exact path="/media" component={Media} />
-
-						<Route exact path="/sports" component={Sports} />
-
-						<Route exact path="/setUserItems" component={SetUserItems} /> */}
-
-					</IonRouterOutlet>
-					
-				</IonReactRouter>
+				</IonRouterOutlet>
+				
+			</IonReactRouter>
 		</IonApp>
     );
 }
