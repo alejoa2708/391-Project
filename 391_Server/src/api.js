@@ -46,6 +46,8 @@ class API {
         //router.post('/register', this.handleRegistration.bind(this));
         router.post('/login', this.handleLogin.bind(this));
         //router.post('/uservalid', this.handleUserValid.bind(this));
+        router.post('/getStudents', this.getStudents.bind(this));
+        router.post('/filterFirstLast', this.filterFirstLast.bind(this));
     }
 
     /**
@@ -80,6 +82,70 @@ class API {
            
        });
 
+    }
+
+
+        /**
+     * Check if the credentials are correct and authenticate login.
+     * @param request Request body contains the username and password.
+     * @param response Response to the client indicating the success status.
+     */
+    handleLogin(request, response) {
+        let body = request.body;
+        
+        // Check if the request body is valid and if the email/password are valid.
+        if (!body || !body.email || !body.password) return;
+        
+        this.database.authenticateStudent(body.email, body.password).then(res => {
+            
+            if(res?.recordset.length === 0){ 
+                response.json({success: false});
+                return
+            };
+            
+            if(body.password !== res?.recordset[0].last_name) {
+               //console.log(false);
+               response.json({ success: false });
+            } else{
+               //console.log(true);
+               response.json({ success: true });
+            }
+           
+       });
+
+        // Attempt to authenticate and respond with the database status.
+        /* this.database.authenticateStudent(body.email, body.password, status => {
+            
+            response.json({ success: status });
+        }); */
+    }
+
+    /**
+     * 
+     * @param response Response to the client indicating the success status.
+     */
+    getStudents(request, response) {
+        let body = request.body;
+            
+        this.database.getStudents().then(res => {
+            //console.log(res);
+            response.json(res);
+        });
+    }
+
+    /**
+     * API to get the filtered stuff
+     * @param request Request body contains the first and last name filters
+     * @param response Response to the client with filtered students
+     */
+    filterFirstLast(request, response) {
+        let body = request.body;
+        
+        this.database.filterStudentsFirstLast(body.firstName, body.lastName).then(res => {
+            console.log(res);
+            console.log("did it work?\n");
+            response.json(res);
+        });
     }
     
 }

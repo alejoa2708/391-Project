@@ -1,9 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { IonButton, IonContent, IonGrid, IonIcon, IonLabel, IonList, IonPage, IonRow, IonToolbar, useIonAlert } from '@ionic/react';
 import { gridOutline, imageOutline, peopleOutline, basketballOutline, homeOutline, closeOutline, chevronForward, menuOutline, powerOutline } from 'ionicons/icons';
 import ReactDOM from 'react-dom';
 import { useHistory } from "react-router-dom";
 import './Dashboard.css';
+import TabOne from './TabOne.js';
+import TabTwo from './TabTwo.js';
+import TabThree from './TabThree.js';
+import TabFour from './TabFour.js';
 
 const Dashboard = () => {
 	
@@ -11,10 +15,37 @@ const Dashboard = () => {
 	const [layoutItems, setLayout] = useState([]);  // layout item holder
 	const [sidebar, setSidebar] = useState(false);	// Sets nav side bar state to false (closed)
 	const showSidebar = () => setSidebar(!sidebar); // Triggering sidebar to expand
+	const [tab1, setTab1] = useState(true);
+	const [tab2, setTab2] = useState(false);
+	const [tab3, setTab3] = useState(false);
+	const [tab4, setTab4] = useState(false);
 	const history = useHistory();
 
 	function onSelectMenu (elementId){
 		document.getElementById(elementId)?.setAttribute("id", "menu-items1");
+	}
+
+	function tabSwitch (tabNum){
+		if(tabNum == 1) {
+			setTab1(true);
+		} else {
+			setTab1(false);
+		}
+		if(tabNum == 2) {
+			setTab2(true);
+		} else {
+			setTab2(false);
+		}
+		if(tabNum == 3) {
+			setTab3(true);
+		} else {
+			setTab3(false);
+		}
+		if(tabNum == 4) {
+			setTab4(true);
+		} else {
+			setTab4(false);
+		}
 	}
 
 	/**
@@ -106,27 +137,27 @@ const Dashboard = () => {
 
 							<IonList id='menu-list' color= "dark">
 								
-								<IonButton className='menu-items' onClick={() => { }}>
+								<IonButton className='menu-items' onClick={() => { tabSwitch(1) }}>
 									<IonIcon className={getWindowDimensions() < 768 ? 'menu-icons-mobile': 'menu-icons'} icon={homeOutline} size='small'></IonIcon>	
 									<IonLabel className={sidebar ? 'menu-labels' : 'menu-labels collapsed' }>Dashboard</IonLabel>
 								</IonButton>
 
-								<IonButton className='menu-items' onClick={() => { }}>
+								<IonButton className='menu-items' onClick={() => { tabSwitch(2) }}>
 									<IonIcon className={getWindowDimensions() < 768 ? 'menu-icons-mobile': 'menu-icons'} icon={peopleOutline} size='small'></IonIcon>	
 									<IonLabel className={sidebar ? 'menu-labels' : 'menu-labels collapsed' }>Users</IonLabel>
 								</IonButton>
 
-								<IonButton className='menu-items' onClick={() => { }}>
+								<IonButton className='menu-items' onClick={() => { tabSwitch(3) }}>
 									<IonIcon className={getWindowDimensions() < 768 ? 'menu-icons-mobile': 'menu-icons'} icon={gridOutline} size='small'></IonIcon>	
 									<IonLabel className={sidebar ? 'menu-labels' : 'menu-labels collapsed' }>Courses</IonLabel>
 								</IonButton>
 
-								<IonButton className='menu-items' onClick={() => { }}>
+								<IonButton className='menu-items' onClick={() => { tabSwitch(4) }}>
 									<IonIcon className={getWindowDimensions() < 768 ? 'menu-icons-mobile': 'menu-icons'} icon={imageOutline} size='small'></IonIcon>	
 									<IonLabel className={sidebar ? 'menu-labels' : 'menu-labels collapsed' }>Lorem</IonLabel>
 								</IonButton>
 
-								<IonButton className='menu-items' onClick={() => { }}>
+								<IonButton className='menu-items' onClick={() => { tabSwitch(5) }}>
 									<IonIcon className={getWindowDimensions() < 768 ? 'menu-icons-mobile': 'menu-icons'} icon={basketballOutline} size='small'></IonIcon>	
 									<IonLabel className={sidebar ? 'menu-labels' : 'menu-labels collapsed' }>Lorem</IonLabel>
 								</IonButton>
@@ -144,6 +175,38 @@ const Dashboard = () => {
 					</aside>
 					
 						<IonGrid id='item-grid'>
+							{tab1 && <TabOne />}
+							{tab2 && <TabTwo />}
+							{tab3 && <TabThree />}
+							{tab4 && <TabFour />}
+								
+							{/* <IonRow id='item-main-row'> 
+								<IonCol id='layout-col'>
+									
+									<div>
+										<IonTitle>
+											Layout box
+											<IonIcon className='expand-btn' icon={expandOutline} size='small'></IonIcon>
+										</IonTitle>
+									</div>
+									
+									<IonRow id='layout-items-row'>
+
+										{items}
+										
+									</IonRow>
+								</IonCol>
+
+								<IonCol id='media-col'>
+									<div>
+										<IonTitle>
+											Media box?
+											<IonIcon className='expand-btn' icon={expandOutline} size='small'></IonIcon>
+										</IonTitle>
+									</div>
+								</IonCol>
+							</IonRow>
+						*/}
 							
 						</IonGrid>
 								

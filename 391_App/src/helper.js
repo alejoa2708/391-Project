@@ -7,7 +7,17 @@ export default class Helper {
     static post(url, data) {
         try {
             let response = axios.post(url, data);
+            //console.log(response);
+            return response;
+        } catch (e) {
+            console.log(e);
+        }
+    }
 
+    static get(url) {
+        try {
+            let response = axios.get(url);
+            console.log(response)
             return response;
         } catch (e) {
             console.log(e);
