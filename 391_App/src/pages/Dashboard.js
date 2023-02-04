@@ -6,6 +6,7 @@ import { useHistory } from "react-router-dom";
 import './Dashboard.css';
 import TabOne from './TabOne.js';
 import TabTwo from './TabTwo.js';
+import TabThree from './TabThree.js';
 
 const Dashboard = () => {
 	
@@ -169,6 +170,7 @@ const Dashboard = () => {
 						<IonGrid id='item-grid'>
 							{tab1 && <TabOne />}
 							{tab2 && <TabTwo />}
+							{tab3 && <TabThree />}
 								
 							{/* <IonRow id='item-main-row'> 
 								<IonCol id='layout-col'>
