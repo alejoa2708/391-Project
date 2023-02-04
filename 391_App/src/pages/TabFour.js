@@ -3,7 +3,7 @@ import './Dashboard.css';
 import Helper from '../helper';
 import { DataGrid } from '@mui/x-data-grid';
 
-const TabThree = () => {
+const TabFour = () => {
 	
 	const [students, setStudents] = useState({});
 	const [rows, setRows] = useState([]);
@@ -32,14 +32,10 @@ const TabThree = () => {
 
 	return (
 		<>
-			{ students.length > 0 && rows &&
-				<div style={{ height: 700, width: '100%' }}>
-					<DataGrid rows={rows} columns={columns}/>
-				</div>
-			}
+			yooooooooooooooooooo whaaaaaaaaaat shouuuuuuuuuuuld weeeeeeeeeeeeeeeeeeee puttttttttttttttt heeeeeeeeeeeeerrrrrrrreeeeeee?
 		</>	
 	);
 
 }
 
-export default TabThree; 
+export default TabFour; 

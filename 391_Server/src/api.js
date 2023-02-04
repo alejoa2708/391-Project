@@ -47,6 +47,7 @@ class API {
         router.post('/login', this.handleLogin.bind(this));
         //router.post('/uservalid', this.handleUserValid.bind(this));
         router.post('/getStudents', this.getStudents.bind(this));
+        router.post('/filterFirstLast', this.filterFirstLast.bind(this));
     }
 
     /**
@@ -127,7 +128,22 @@ class API {
         let body = request.body;
             
         this.database.getStudents().then(res => {
+            //console.log(res);
+            response.json(res);
+        });
+    }
+
+    /**
+     * API to get the filtered stuff
+     * @param request Request body contains the first and last name filters
+     * @param response Response to the client with filtered students
+     */
+    filterFirstLast(request, response) {
+        let body = request.body;
+        
+        this.database.filterStudentsFirstLast(body.firstName, body.lastName).then(res => {
             console.log(res);
+            console.log("did it work?\n");
             response.json(res);
         });
     }
