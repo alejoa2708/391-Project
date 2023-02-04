@@ -6,38 +6,37 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 
 const TabTwo = () => {
-	
 	const [students, setStudents] = useState({});
 	const [rows, setRows] = useState([]);
+	const [filteredRows, setFilteredRows] = useState([]);
 	const [firstName, setFirstName] = useState('');
 	const [lastName, setLastName] = useState('');
 
 	useEffect(() => {
 		Helper.post(Helper.getAPIUrl('getStudents'), {}).then(response => {
-			//console.log(response.data.recordsets[0]);
 			setStudents(response.data.recordsets[0]);
 		});
-		if(students.length > 0) {
-			prepRows();
+	}, []);
+
+	useEffect(() => {
+		if (students.length > 0) {
+			setRows(prepRows(students));
 		}
 	}, [students]);
 
-	const prepRows = () => {
+	const prepRows = (student) => {
 		const data = [];
-		students.map((item) => 
+		student.map(item => 
 			data.push({ id: item.s_id, first_name: item.first_name, last_name: item.last_name, gender: item.gender })
 		);
-		setRows(data);
+		return data;
 	}
 
 	const filterTable = () => {
-		console.log("clicked")
-		Helper.post(Helper.getAPIUrl('filterFirstLast'), {firstName, lastName}).then(response => {
-			//console.log(response.data.recordsets[0]);
-			//setStudents(response.data.recordsets[0]);
+		Helper.post(Helper.getAPIUrl('filterFirstLast'), { firstName, lastName }).then(response => {
+			setFilteredRows(prepRows(response.data.recordsets[0]));
 		});
-		//prepRows();
-		//console.log(rows);
+
 	}
 
 	const columns = [
@@ -49,21 +48,20 @@ const TabTwo = () => {
 
 	return (
 		<>
-			<>
-				{ students.length > 0 && rows &&
-					<div style={{ height: 700, width: '100%' }}>
-						<div>
-							<TextField id="outlined-basic" label="First Name" variant="outlined" onChange={(e)=>setFirstName(e)}/>
-							<TextField id="outlined-basic" label="Last Name" variant="outlined" onChange={(e)=>setLastName(e)}/>
-							<Button variant="contained" onClick={()=>{filterTable()}}>Filter</Button>
-						</div>
-						<DataGrid rows={rows} columns={columns}/>
-					</div>
+			<div style={{ height: 700, width: '100%' }}>
+				<div>
+					<TextField id="outlined-basic" label="First Name" variant="outlined" onChange={e => setFirstName(e.target.value)} />
+					<TextField id="outlined-basic" label="Last Name" variant="outlined" onChange={e => setLastName(e.target.value)} />
+					<Button variant="contained" onClick={filterTable}>Filter</Button>
+				</div>
+				{ filteredRows.length > 0 ?
+					<DataGrid rows={filteredRows} columns={columns} />
+				:
+					rows.length > 0 && <DataGrid rows={rows} columns={columns} />
 				}
-			</>
+			</div>
 		</>	
 	);
+};
 
-}
-
-export default TabTwo; 
+export default TabTwo;
