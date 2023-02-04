@@ -7,6 +7,7 @@ import './Dashboard.css';
 import TabOne from './TabOne.js';
 import TabTwo from './TabTwo.js';
 import TabThree from './TabThree.js';
+import TabFour from './TabFour.js';
 
 const Dashboard = () => {
 	
@@ -17,6 +18,7 @@ const Dashboard = () => {
 	const [tab1, setTab1] = useState(true);
 	const [tab2, setTab2] = useState(false);
 	const [tab3, setTab3] = useState(false);
+	const [tab4, setTab4] = useState(false);
 	const history = useHistory();
 
 	function onSelectMenu (elementId){
@@ -38,6 +40,11 @@ const Dashboard = () => {
 			setTab3(true);
 		} else {
 			setTab3(false);
+		}
+		if(tabNum == 4) {
+			setTab4(true);
+		} else {
+			setTab4(false);
 		}
 	}
 
@@ -171,6 +178,7 @@ const Dashboard = () => {
 							{tab1 && <TabOne />}
 							{tab2 && <TabTwo />}
 							{tab3 && <TabThree />}
+							{tab4 && <TabFour />}
 								
 							{/* <IonRow id='item-main-row'> 
 								<IonCol id='layout-col'>

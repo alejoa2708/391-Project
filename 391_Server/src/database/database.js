@@ -26,6 +26,22 @@ class Database {
     }
 
     /**
+     * Student info getter. 
+     * @returns student information
+     */
+    filterStudentsFirstLast = async(first, last) => {
+        try{
+            let pool = await this.sql.connect(this.config);
+            let student = pool.request().query("SELECT * FROM dbo.Student WHERE first_name LIKE '%" + first + "%' AND last_name LIKE '%" + last + "%'");
+            console.log(student)
+            return student;
+        }
+        catch(err){
+            console.log(err)
+        }
+    }
+
+    /**
      * Checks the credentials provided if they match the database.
      * @param email User"s inputted email.
      * @param password Rawtext password of the user.
