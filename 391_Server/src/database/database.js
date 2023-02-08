@@ -16,8 +16,24 @@ class Database {
     getStudents = async() => {
         try{
             let pool = await this.sql.connect(this.config);
-            let student = pool.request().query("SELECT * from dbo.Student");
+            let student = pool.request().query("SELECT * FROM dbo.Student");
             //console.log(student);
+            return student;
+        }
+        catch(err){
+            console.log(err)
+        }
+    }
+
+    /**
+     * Student info getter. 
+     * @returns student information
+     */
+    filterStudentsFirstLast = async(first, last) => {
+        try{
+            let pool = await this.sql.connect(this.config);
+            let student = pool.request().query("SELECT * FROM dbo.Student WHERE first_name LIKE '%" + first + "%' AND last_name LIKE '%" + last + "%'");
+            console.log(student)
             return student;
         }
         catch(err){
@@ -35,7 +51,8 @@ class Database {
         try{
             let pool = await this.sql.connect(this.config);
             let data = pool.request().query("SELECT * FROM Student WHERE first_name=" + "'" + email + "'");
-            //console.log(data);
+            console.log(data);
+            
             return data;
         }
         catch(err){
