@@ -4,6 +4,8 @@ import Helper from '../helper';
 import { DataGrid } from '@mui/x-data-grid';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import Alert from '@mui/material/Alert';
+import AlertTitle from '@mui/material/AlertTitle';
 
 const TabTwo = () => {
 	const [students, setStudents] = useState({});
@@ -11,6 +13,7 @@ const TabTwo = () => {
 	const [filteredRows, setFilteredRows] = useState([]);
 	const [firstName, setFirstName] = useState('');
 	const [lastName, setLastName] = useState('');
+	const [open, setOpen] = React.useState(false);
 
 	useEffect(() => {
 		Helper.post(Helper.getAPIUrl('getStudents'), {}).then(response => {
@@ -35,6 +38,9 @@ const TabTwo = () => {
 	const filterTable = () => {
 		Helper.post(Helper.getAPIUrl('filterFirstLast'), { firstName, lastName }).then(response => {
 			setFilteredRows(prepRows(response.data.recordsets[0]));
+			if(response.data.recordsets[0].length === 0){
+				setOpen(true);
+			}
 		});
 
 	}
@@ -58,6 +64,15 @@ const TabTwo = () => {
 					<DataGrid rows={filteredRows} columns={columns} />
 				:
 					rows.length > 0 && <DataGrid rows={rows} columns={columns} />
+				}{ open ?
+					<div style={{ position: "absolute", top: 0, left: 0, right: 0, zIndex: 999 }}>
+					<Alert onClose={() => {setOpen(false)}} severity="error">
+					<AlertTitle>Error</AlertTitle>
+					No names with the provided filters <strong>- change your search!</strong>
+				  </Alert>
+				  </div>
+				:
+				<></>
 				}
 			</div>
 		</>	
