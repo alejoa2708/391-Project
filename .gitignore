@@ -1,24 +1,13 @@
 
-391_App/package-lock.json
-391_App/package.json
-node_modules
+#391_App/package-lock.json
+#391_App/package.json
 node_modules
 package-lock.json
 package.json
 391_App/dbFiles/dbConfig.js
-391_App/dbFiles/dbConfig.js
-391_App/package-lock.json
-391_App/package.json
 package-lock.json
 package.json
 package-lock.json
 391_Server/dbFiles/dbConfig.js
-391_App/package-lock.json
-391_App/package.json
 391_Server/src/dbFiles/dbConfig.js
-391_Server/package.json
-391_Server/src/dbFiles/dbConfig.js
-391_Server/src/dbFiles/dbConfig.js
-391_App/package-lock.json
-391_App/package.json
-391_Server/src/dbFiles/dbConfig.js
+#391_Server/package.json
