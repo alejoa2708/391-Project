@@ -8,6 +8,59 @@ class Database {
         this.sql = SQL;
         //this.sanitizer = Sanitizer;
     }
+
+    /**
+     * Course info getter by department
+     * @returns course information
+     */
+    filterCoursesByDept = async(first, last) => {
+        try{
+            let pool = await this.sql.connect(this.config);
+            var query = `
+                        SELECT title as c_name, d_name, credits, c_id, D.d_id
+                        FROM Course as C, Depasrtment as D
+                        WHERE C.d_id = D.d_id AND D.d_id = %` + first + `%;
+                        `
+            let course = pool.request().query(query);
+            //console.log(course)
+            return course;
+        }
+        catch(err){
+            console.log(err)
+        }
+    }
+
+    /**
+     * Course info getter. 
+     * @returns course information
+     */
+    getCourses = async() => {
+        try{
+            let pool = await this.sql.connect(this.config);
+            let course = pool.request().query("SELECT * FROM dbo.Course");
+            //console.log(course);
+            return course;
+        }
+        catch(err){
+            console.log(err)
+        }
+    }
+
+    /**
+     * Department info getter. 
+     * @returns department information
+     */
+    getDepartments = async() => {
+        try{
+            let pool = await this.sql.connect(this.config);
+            let department = pool.request().query("SELECT * FROM dbo.Department");
+            //console.log(department);
+            return department;
+        }
+        catch(err){
+            console.log(err)
+        }
+    }
    
     /**
      * Student info getter. 

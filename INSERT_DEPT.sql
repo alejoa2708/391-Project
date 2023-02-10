@@ -1,4 +1,3 @@
-/*script generated for free with OnlineDataGenerator available at: https://www.onlinedatagenerator.com */
 INSERT INTO Department VALUES('1','Earth Science',4);
 INSERT INTO Department VALUES('2','Ecology',3);
 INSERT INTO Department VALUES('3','French',4);
