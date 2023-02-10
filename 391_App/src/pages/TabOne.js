@@ -132,7 +132,7 @@ const TabOne = () => {
           </Button>
         </div>
         <div style={{ display: 'flex', height: '80%' }}>
-          <div style={{ width: '60%', height: '100%', padding: '10px' }}>
+          <div style={{ width: '70%', height: '100%', padding: '10px' }}>
             {filteredStudentRows.length > 0 ? (
               <DataGrid
 			  	rows={filteredStudentRows}
@@ -149,7 +149,7 @@ const TabOne = () => {
               )
             )}
           </div>
-          <div style={{ width: '60%', height: '100%', flex: 1, padding: '10px' }}>
+          <div style={{ width: '30%', height: '100%', flex: 1, padding: '10px' }}>
             {courseRows.length > 0 ? (
               <DataGrid
 			  	rows={courseRows}
