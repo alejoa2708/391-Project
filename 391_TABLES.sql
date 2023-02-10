@@ -1,5 +1,6 @@
 CREATE TABLE Department (
 	d_id INT PRIMARY KEY,
+	d_name VARCHAR(255) NOT NULL,
 	building INT NOT NULL
 );
 
@@ -64,6 +65,7 @@ CREATE TABLE Takes (
 
 CREATE TABLE Prereq (
 	c_id INT PRIMARY KEY,
+	p_id INT NOT NULL,
 	title VARCHAR(255) NOT NULL,
 	credits INT NOT NULL
 );
