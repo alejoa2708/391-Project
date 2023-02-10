@@ -52,8 +52,9 @@ function Login() {
 			if (!response || !response.data || !response.data.success) {
 			return sendError('The credentials you have entered are invalid.');
 		  }
-		  
+		
 		  //props.history.push('/dashboard');
+		  console.log("hello world");
 		  window.location.replace('/dashboard');
 		});
 	}

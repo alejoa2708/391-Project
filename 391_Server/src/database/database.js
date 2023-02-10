@@ -51,8 +51,10 @@ class Database {
         try{
             let pool = await this.sql.connect(this.config);
             let data = pool.request().query("SELECT * FROM Student WHERE first_name=" + "'" + email + "'");
+
             console.log(data);
             
+
             return data;
         }
         catch(err){
