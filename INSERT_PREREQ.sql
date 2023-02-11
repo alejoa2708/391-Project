@@ -1,5 +1,3 @@
-
-
 INSERT INTO Prereq VALUES('1','1','Accounting',3);
 INSERT INTO Prereq VALUES('2','2','Language Arts',3);
 INSERT INTO Prereq VALUES('3','3','English IV',3);
