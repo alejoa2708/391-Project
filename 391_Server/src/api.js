@@ -48,6 +48,9 @@ class API {
         //router.post('/uservalid', this.handleUserValid.bind(this));
         router.post('/getStudents', this.getStudents.bind(this));
         router.post('/filterFirstLast', this.filterFirstLast.bind(this));
+        router.post('/getCourses', this.getCourses.bind(this));
+        router.post('/filterCoursesByDept', this.filterCoursesByDept.bind(this));
+        router.post('/getDepartments', this.getDepartments.bind(this));
     }
 
     /**
@@ -118,6 +121,47 @@ class API {
             
             response.json({ success: status });
         }); */
+    }
+
+    /**
+     * 
+     * @param response Response to the client indicating the success status.
+     */
+    getDepartments(request, response) {
+        let body = request.body;
+            
+        this.database.getDepartments().then(res => {
+            //console.log(res);
+            response.json(res);
+        });
+    }
+
+    /**
+     * 
+     * @param response Response to the client indicating the success status.
+     */
+     getCourses(request, response) {
+        let body = request.body;
+            
+        this.database.getCourses().then(res => {
+            //console.log(res);
+            response.json(res);
+        });
+    }
+
+    /**
+     * API to get the filtered courses
+     * @param request Request body contains the department id filters
+     * @param response Response to the client with filtered courses
+     */
+    filterCoursesByDept(request, response) {
+        let body = request.body;
+        
+        this.database.filterCoursesByDept(body.d_id).then(res => {
+            console.log(res);
+            console.log("did it work?\n");
+            response.json(res);
+        });
     }
 
     /**

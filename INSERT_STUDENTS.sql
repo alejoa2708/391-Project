@@ -1,4 +1,3 @@
-
 INSERT INTO Student VALUES('1','Benny','Gray','Male');
 INSERT INTO Student VALUES('2','Liam','Gunn','Male');
 INSERT INTO Student VALUES('3','Katelyn','Power','Female');
