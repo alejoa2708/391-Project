@@ -39,12 +39,13 @@ CREATE TABLE Section (
 	i_id INT,
 	semester CHAR(3) NOT NULL,
 	year INT NOT NULL,
-	capacity INT NOT NULL,
-	enrolled INT NOT NULL,
+	capacity INT NOT NULL  ,
+	enrolled INT NOT NULL ,
 	PRIMARY KEY (sec_id, c_id, ts_id, i_id, semester, year),
 	FOREIGN KEY (c_id) REFERENCES Course(c_id),
 	FOREIGN KEY (ts_id) REFERENCES Timeslot(ts_id),
-	FOREIGN KEY (i_id) REFERENCES Instructor(i_id)
+	FOREIGN KEY (i_id) REFERENCES Instructor(i_id),
+	CONSTRAINT CHK_ENR CHECK (capacity<=30)
 );
 
 
@@ -64,7 +65,7 @@ CREATE TABLE Takes (
 
 CREATE TABLE Prereq (
 	c_id INT PRIMARY KEY,
+	p_id INT NOT NULL,
 	title VARCHAR(255) NOT NULL,
 	credits INT NOT NULL
 );
-

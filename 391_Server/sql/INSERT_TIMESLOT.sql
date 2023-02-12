@@ -1,0 +1,13 @@
+INSERT INTO Timeslot VALUES('1','08:00', '09:00');
+INSERT INTO Timeslot VALUES('2','09:00', '10:00');
+INSERT INTO Timeslot VALUES('3','10:00', '11:00');
+INSERT INTO Timeslot VALUES('4','11:00', '12:00');
+INSERT INTO Timeslot VALUES('5','01:00', '02:00');
+INSERT INTO Timeslot VALUES('6','02:00', '03:00');
+INSERT INTO Timeslot VALUES('7','03:00', '04:00');
+INSERT INTO Timeslot VALUES('8','04:00', '05:00');
+INSERT INTO Timeslot VALUES('9','05:00', '06:00');
+INSERT INTO Timeslot VALUES('10','06:00', '07:00');
+INSERT INTO Timeslot VALUES('11','07:00', '08:00');
+INSERT INTO Timeslot VALUES('12','08:00', '09:00');
+INSERT INTO Timeslot VALUES('13','09:00', '10:00');
