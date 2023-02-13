@@ -86,9 +86,30 @@ const TabOne = () => {
     setSelectCourse(row);
   };
 
-  const handleEnroll = (student, course) => {
-    console.log(student);
-	console.log(course);
+  function handleEnroll() {
+    
+    if (!selectStudent || !selectCourse) {
+      console.error("Invalid Input(s) - Select a student AND a course")
+    } 
+	else {
+    	console.log(selectStudent.row.id);
+		console.log(selectCourse.row.id);
+
+    	let studetID = selectStudent.row.id;
+    	let courseID = selectCourse.row.id; 
+
+    	Helper.post(Helper.getAPIUrl('enroll'), { studetID, courseID }).then(response => {
+    		if (!response || !response.data || !response.data.success) {
+        		console.error("Enrolment Failed. Return an error message here later...");
+				return;
+        	}
+			
+			console.log("Enrolment Successful. Return an success message here later...");
+			return;
+      });
+    }
+
+
   };
 
   const studentColumns = [
@@ -189,7 +210,7 @@ const TabOne = () => {
 		<Grid container justifyContent="flex-end" sx={{p:1}}>
 			<Button
 				variant='contained'
-				onClick={handleEnroll(selectStudent, selectCourse)}
+				onClick={() => handleEnroll()}
 				sx={{p:1, mt:2}}
 			>
             Enroll
