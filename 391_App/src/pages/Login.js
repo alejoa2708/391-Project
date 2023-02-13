@@ -54,7 +54,7 @@ function Login() {
 		  }
 		
 		  //props.history.push('/dashboard');
-		  console.log("hello world");
+		  //console.log("hello world");
 		  window.location.replace('/dashboard');
 		});
 	}

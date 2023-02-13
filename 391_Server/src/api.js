@@ -43,9 +43,8 @@ class API {
         // Blank get response when someone attempts to connect to the API directly.
         router.get('/', this.handleRoot.bind(this));
 
-        //router.post('/register', this.handleRegistration.bind(this));
         router.post('/login', this.handleLogin.bind(this));
-        //router.post('/uservalid', this.handleUserValid.bind(this));
+        router.post('/enroll', this.handleEnrollStudent.bind(this));
         router.post('/getStudents', this.getStudents.bind(this));
         router.post('/filterFirstLast', this.filterFirstLast.bind(this));
         router.post('/getCourses', this.getCourses.bind(this));
@@ -86,27 +85,22 @@ class API {
        });
 
     }
-
-
-        /**
-     * Check if the credentials are correct and authenticate login.
-     * @param request Request body contains the username and password.
+    
+    /**
+     * Enrolls student with s_id(student ID) into a course with c_id. 
+     * @param request Request body contains the student ID and course ID.
      * @param response Response to the client indicating the success status.
+     * @returns 
      */
-    handleLogin(request, response) {
+    handleEnrollStudent(request, response) {
         let body = request.body;
+
+        // Check if the request body is validity.
+        if (!body || !body.studetID || !body.courseID) return;   
         
-        // Check if the request body is valid and if the email/password are valid.
-        if (!body || !body.email || !body.password) return;
-        
-        this.database.authenticateStudent(body.email, body.password).then(res => {
-            
-            if(res?.recordset.length === 0){ 
-                response.json({success: false});
-                return
-            };
-            
-            if(body.password !== res?.recordset[0].last_name) {
+        this.database.enrollStudent(body.studetID, body.courseID).then(res => {
+            console.log(res);
+            if(!res) {
                //console.log(false);
                response.json({ success: false });
             } else{
@@ -115,12 +109,6 @@ class API {
             }
            
        });
-
-        // Attempt to authenticate and respond with the database status.
-        /* this.database.authenticateStudent(body.email, body.password, status => {
-            
-            response.json({ success: status });
-        }); */
     }
 
     /**
