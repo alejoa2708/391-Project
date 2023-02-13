@@ -92,8 +92,8 @@ const TabOne = () => {
       console.error("Invalid Input(s) - Select a student AND a course")
     } 
 	else {
-    	console.log(selectStudent.row.id);
-		console.log(selectCourse.row.id);
+    	console.log(selectStudent.row);
+		console.log(selectCourse.row);
 
     	let studetID = selectStudent.row.id;
     	let courseID = selectCourse.row.id; 

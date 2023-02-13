@@ -98,7 +98,7 @@ class API {
         // Check if the request body is validity.
         if (!body || !body.studetID || !body.courseID) return;   
         
-        this.database.enrollStudent(body.studetID, body.courseID).then(res => {
+        this.database.enrollStudent(body.studetID, body.courseID, body.secID, body.semester, body.year, body.start, body.end).then(res => {
             console.log(res);
             if(!res) {
                //console.log(false);
