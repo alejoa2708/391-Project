@@ -23,7 +23,7 @@ class Database {
             let conflictProc = pool.request().query(`EXEC CheckTimeConflict '${s_id}', '${semester}', '${year}', '${start}', '${end}'`);
 
             // If everything passes/true
-            if (capProc || prereqProc || conflictProc) {
+            if (capProc && prereqProc && conflictProc) {
                 // run transactions in this line...
                 // run INSERT STUDENT query here...
                 return true;

@@ -94,6 +94,7 @@ class API {
      */
     handleEnrollStudent(request, response) {
         let body = request.body;
+        console.log(request.body);
 
         // Check if the request body is validity.
         if (!body || !body.studetID || !body.courseID) return;   
