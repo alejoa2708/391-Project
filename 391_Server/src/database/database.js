@@ -63,7 +63,13 @@ class Database {
     getCourses = async() => {
         try{
             let pool = await this.sql.connect(this.config);
-            let course = pool.request().query("SELECT * FROM dbo.Course");
+            var query = `
+                        SELECT C.c_id, C.title, C.d_id, S.sec_id, S.i_id, S.semester, S.year, S.ts_id, TS.start_time, TS.end_time 
+                        FROM dbo.Course as C 
+                        JOIN dbo.Section as S ON C.c_id = S.c_id 
+                        JOIN dbo.Timeslot as TS ON S.ts_id = TS.ts_id;
+                        `
+            let course = pool.request().query(query);
             //console.log(course);
             return course;
         }
