@@ -9,6 +9,12 @@ import AlertTitle from '@mui/material/AlertTitle'
 import Grid from '@mui/material/Grid'
 import { Typography } from '@mui/material'
 
+const convertTime = (date) => {
+  const newDate = new Date(date);
+  const time = newDate.toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'});
+  return time;
+}
+
 const TabOne = () => {
   const [students, setStudents] = useState({})
   const [studentRows, setStudentRows] = useState([])
@@ -54,13 +60,18 @@ const TabOne = () => {
   }
 
   const prepCourseRows = courses => {
-    const data = []
+    const data = [];
     courses.map(item =>
       data.push({
         id: item.c_id,
         course_name: item.title,
         credits: item.credits,
-        department: item.d_id
+        department: item.d_id,
+        sec: item.sec_id,
+        sem: item.semester,
+        year: item.year,
+        start: convertTime(item.start_time),
+        end: convertTime(item.end_time)
       })
     )
     return data
@@ -116,14 +127,19 @@ const TabOne = () => {
     { field: 'id', headerName: 'ID', width: 50 },
     { field: 'first_name', headerName: 'First Name', width: 125 },
     { field: 'last_name', headerName: 'Last Name', width: 125 },
-    { field: 'gender', headerName: 'Gender', width: 100 }
+    { field: 'gender', headerName: 'Gender', width: 100, hide: true }
   ]
 
   const courseColumns = [
     { field: 'id', headerName: 'ID', width: 50 },
     { field: 'course_name', headerName: 'Course', width: 150 },
     { field: 'credits', headerName: 'Credits', width: 100, hide: true },
-    { field: 'department', headerName: 'Department', width: 100, hide: true }
+    { field: 'department', headerName: 'Department', width: 100, hide: true },
+    { field: 'sec', headerName: 'Section', width: 70 },
+    { field: 'sem', headerName: 'Semester', width: 70 },
+    { field: 'year', headerName: 'Year', width: 70 },
+    { field: 'start', headerName: 'Start Time', width: 100 },
+    { field: 'end', headerName: 'End Time', width: 100 }
   ]
 
   return (
@@ -153,7 +169,7 @@ const TabOne = () => {
           </Button>
         </div>
         <div style={{ display: 'flex', height: '80%' }}>
-          <div style={{ width: '70%', height: '100%', padding: '10px' }}>
+          <div style={{ width: '45%', height: '100%', padding: '10px' }}>
             {filteredStudentRows.length > 0 ? (
               <DataGrid
 			  	rows={filteredStudentRows}
@@ -170,7 +186,7 @@ const TabOne = () => {
               )
             )}
           </div>
-          <div style={{ width: '30%', height: '100%', flex: 1, padding: '10px' }}>
+          <div style={{ width: '50%', height: '100%', flex: 1, padding: '10px' }}>
             {courseRows.length > 0 ? (
               <DataGrid
 			  	rows={courseRows}
