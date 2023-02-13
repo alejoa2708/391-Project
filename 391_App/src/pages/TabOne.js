@@ -71,7 +71,9 @@ const TabOne = () => {
         sem: item.semester,
         year: item.year,
         start: convertTime(item.start_time),
-        end: convertTime(item.end_time)
+        end: convertTime(item.end_time),
+        tsid: item.ts_id,
+        iid: item.i_id,
       })
     )
     return data
@@ -90,10 +92,12 @@ const TabOne = () => {
   }
 
   const handleStudentClick = (row) => {
+    console.log(row.row)
     setSelectStudent(row);
   };
 
   const handleCourseClick = (row) => {
+    console.log(row.row)
     setSelectCourse(row);
   };
 
@@ -139,7 +143,9 @@ const TabOne = () => {
     { field: 'sem', headerName: 'Semester', width: 70 },
     { field: 'year', headerName: 'Year', width: 70 },
     { field: 'start', headerName: 'Start Time', width: 100 },
-    { field: 'end', headerName: 'End Time', width: 100 }
+    { field: 'end', headerName: 'End Time', width: 100 },
+    { field: 'ts_id', headerName: 'TSID', width: 150, hide: true },
+    { field: 'i_id', headerName: 'IID', width: 150, hide: true },
   ]
 
   return (
