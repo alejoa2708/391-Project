@@ -144,8 +144,8 @@ const TabOne = () => {
     { field: 'year', headerName: 'Year', width: 70 },
     { field: 'start', headerName: 'Start Time', width: 100 },
     { field: 'end', headerName: 'End Time', width: 100 },
-    { field: 'ts_id', headerName: 'TSID', width: 150, hide: true },
-    { field: 'i_id', headerName: 'IID', width: 150, hide: true },
+    { field: 'ts_id', headerName: 'TSID', width: 150, hide: false },
+    { field: 'i_id', headerName: 'IID', width: 150, hide: false },
   ]
 
   return (
