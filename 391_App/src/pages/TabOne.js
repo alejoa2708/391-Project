@@ -110,10 +110,17 @@ const TabOne = () => {
     	console.log(selectStudent.row);
 		console.log(selectCourse.row);
 
-    	let studetID = selectStudent.row.id;
+    	let studentID = selectStudent.row.id;
     	let courseID = selectCourse.row.id; 
+		let sectionID = selectCourse.row.sec;
+		let semester = selectCourse.row.sem;
+		let year = selectCourse.row.year;
+		let start = selectCourse.row.start.split(' ')[0];
+		let end = selectCourse.row.end.split(' ')[0];
 
-    	Helper.post(Helper.getAPIUrl('enroll'), { studetID, courseID }).then(response => {
+		console.log(studentID, courseID, sectionID, semester, year, start, end);
+
+    	Helper.post(Helper.getAPIUrl('enroll'), { studentID, courseID, sectionID, semester, year, start, end }).then(response => {
     		if (!response || !response.data || !response.data.success) {
         		console.error("Enrolment Failed. Return an error message here later...");
 				return;
@@ -123,7 +130,6 @@ const TabOne = () => {
 			return;
       });
     }
-
 
   };
 
