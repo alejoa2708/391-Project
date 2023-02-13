@@ -10,6 +10,32 @@ class Database {
     }
 
     /**
+     * Performs student enrolment with implementation of SQL procedures, views, and trasactions.
+     * @param s_id student ID
+     * @param c_id Course ID
+     * @returns 
+     */
+    enrollStudent = async(s_id, c_id, sec_id, semester, year, start, end) => {
+        try{
+            let pool = await this.sql.connect(this.config);
+            let capProc = pool.request().query(`EXEC CheckCapacity '${s_id}', '${sec_id}'`);
+            let prereqProc = pool.request().query(`EXEC CheckPrereq '${s_id}', '${c_id}'`);
+            let conflictProc = pool.request().query(`EXEC CheckTimeConflict '${s_id}', '${semester}', '${year}', '${start}', '${end}'`);
+
+            // If everything passes/true
+            if (capProc || prereqProc || conflictProc) {
+                // run transactions in this line...
+                // run INSERT STUDENT query here...
+                return true;
+            }
+            return false;
+        }
+        catch(err){
+            console.log(err)
+        }
+    }
+
+    /**
      * Course info getter by department
      * @returns course information
      */
@@ -103,7 +129,7 @@ class Database {
 
         try{
             let pool = await this.sql.connect(this.config);
-            let data = pool.request().query("SELECT * FROM Student WHERE first_name=" + "'" + email + "'");
+            let data = pool.request().query(`SELECT * FROM Student WHERE first_name='${email}'`);
 
             console.log(data);
             
