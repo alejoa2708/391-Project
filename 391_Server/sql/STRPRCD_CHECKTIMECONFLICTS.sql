@@ -27,9 +27,9 @@ BEGIN
                 CASE
                     WHEN ((@Start >= Dates.start_time AND @Start < Dates.end_time) OR
                             (@End > Dates.start_time AND @End <= Dates.end_time)) THEN 'FALSE'
-                    ELSE 'TRUE'
-                END) = 'FALSE' THEN 'FALSE'
-            ELSE 'TRUE'
+                    ELSE 'true'
+                END) = 'false' THEN 'false'
+            ELSE 'true'
         END AS Result
     FROM (SELECT *
 		FROM StudentsAndCourses
