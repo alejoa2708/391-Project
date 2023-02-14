@@ -90,22 +90,19 @@ class API {
      * Enrolls student with s_id(student ID) into a course with c_id. 
      * @param request Request body contains the student ID and course ID.
      * @param response Response to the client indicating the success status.
-     * @returns 
      */
     handleEnrollStudent(request, response) {
         let body = request.body;
-        console.log(request.body);
-
-        // Check if the request body is validity.
-        if (!body || !body.studetID || !body.courseID) return;   
         
-        this.database.enrollStudent(body.studetID, body.courseID, body.secID, body.semester, body.year, body.start, body.end).then(res => {
-            console.log(res);
-            if(!res) {
-               //console.log(false);
+        // Check if the request body is validity.
+        if (!body || !body.studentID || !body.courseID || !body.sectionID || !body.semester || !body.year || !body.start || !body.end) return;   
+        
+        this.database.enrollStudent(body.studentID, body.courseID, body.sectionID, body.semester, body.year, body.start, body.end).then(res => {
+            
+            // If any of the procedures did not pass or returned a false availability/result return false else enrolment successful
+            if (!(JSON.parse(res[0].recordset[0].Available) && JSON.parse(res[1].recordset[0].result) && JSON.parse(res[2].recordset[0].Result))) {
                response.json({ success: false });
             } else{
-               //console.log(true);
                response.json({ success: true });
             }
            

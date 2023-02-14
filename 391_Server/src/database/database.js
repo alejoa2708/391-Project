@@ -11,24 +11,23 @@ class Database {
 
     /**
      * Performs student enrolment with implementation of SQL procedures, views, and trasactions.
-     * @param s_id student ID
+     * @param s_id Student ID
      * @param c_id Course ID
-     * @returns 
+     * @param sec_id Section ID
+     * @param semester 
+     * @param year 
+     * @param start Course start time
+     * @param end Course end time
+     * @returns a list of promises returned by the queries
      */
     enrollStudent = async(s_id, c_id, sec_id, semester, year, start, end) => {
         try{
             let pool = await this.sql.connect(this.config);
-            let capProc = pool.request().query(`EXEC CheckCapacity '${s_id}', '${sec_id}'`);
-            let prereqProc = pool.request().query(`EXEC CheckPrereq '${s_id}', '${c_id}'`);
-            let conflictProc = pool.request().query(`EXEC CheckTimeConflict '${s_id}', '${semester}', '${year}', '${start}', '${end}'`);
-
-            // If everything passes/true
-            if (capProc && prereqProc && conflictProc) {
-                // run transactions in this line...
-                // run INSERT STUDENT query here...
-                return true;
-            }
-            return false;
+            let capProc = pool.request().query(`EXEC CheckCapacity ${c_id}, ${sec_id};`);
+            let prereqProc = pool.request().query(`EXEC CheckPrereq ${s_id}, ${c_id};`);
+            let conflictProc = pool.request().query(`EXEC CheckTimeConflict ${s_id}, '${semester}', ${year}, '${start}', '${end}';`);
+            
+            return Promise.all([capProc, prereqProc, conflictProc]);
         }
         catch(err){
             console.log(err)
