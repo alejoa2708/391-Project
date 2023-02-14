@@ -95,18 +95,16 @@ class API {
         let body = request.body;
         
         // Check if the request body is validity.
-        if (!body || !body.studentID || !body.courseID || !body.sectionID || !body.semester || !body.year || !body.start || !body.end) return;   
+        if (!body || !body.studentID || !body.courseID || !body.sectionID || !body.semester || !body.year || !body.start || !body.end || !body.takesID || !body.instructorID) return;   
         
-        this.database.enrollStudent(body.studentID, body.courseID, body.sectionID, body.semester, body.year, body.start, body.end).then(res => {
+        this.database.enrollStudent(body.studentID, body.courseID, body.sectionID, body.semester, body.year, body.start, body.end, body.takesID, body.instructorID).then(res => {
             
-            // If any of the procedures did not pass or returned a false availability/result return false else enrolment successful
-            if (!(JSON.parse(res[0].recordset[0].Available) && JSON.parse(res[1].recordset[0].result) && JSON.parse(res[2].recordset[0].Result))) {
-               response.json({ success: false });
-            } else{
-               response.json({ success: true });
+            if (!res){
+                response.json({ success: false });
+            } else {
+                response.json({ success: true });
             }
-           
-       });
+        });
     }
 
     /**

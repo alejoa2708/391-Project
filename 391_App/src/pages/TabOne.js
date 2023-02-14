@@ -130,14 +130,16 @@ const TabOne = () => {
       console.log(selectCourse.row);
 
       let studentID = selectStudent.row.id;
-      let courseID = selectCourse.row.id;
-      let sectionID = selectCourse.row.sec;
-      let semester = selectCourse.row.sem;
-      let year = selectCourse.row.year;
-      let start = selectCourse.row.start.split(" ")[0];
-      let end = selectCourse.row.end.split(" ")[0];
+    	let courseID = selectCourse.row.id; 
+		let sectionID = selectCourse.row.sec;
+		let semester = selectCourse.row.sem;
+		let year = selectCourse.row.year;
+		let start = selectCourse.row.start.split(' ')[0];
+		let end = selectCourse.row.end.split(' ')[0];
+		let takesID = selectCourse.row.tsid;
+		let instructorID = selectCourse.row.iid;
 
-      console.log(studentID, courseID, sectionID, semester, year, start, end);
+		console.log(studentID, courseID, sectionID, semester, year, start, end);
 
       Helper.post(Helper.getAPIUrl("enroll"), {
         studentID,
@@ -147,6 +149,8 @@ const TabOne = () => {
         year,
         start,
         end,
+		takesID, 
+		instructorID
       }).then((response) => {
         if (!response || !response.data || !response.data.success) {
           console.error(

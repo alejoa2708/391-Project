@@ -20,14 +20,34 @@ class Database {
      * @param end Course end time
      * @returns a list of promises returned by the queries
      */
-    enrollStudent = async(s_id, c_id, sec_id, semester, year, start, end) => {
+    enrollStudent = async(s_id, c_id, sec_id, semester, year, start, end, ts_id, i_id) => {
+            
         try{
+            let capacityStatus;
+            let prereqStatus;
+            let conflictStatus;
             let pool = await this.sql.connect(this.config);
             let capProc = pool.request().query(`EXEC CheckCapacity ${c_id}, ${sec_id};`);
+            let res = await capProc;
+            capacityStatus = JSON.parse(res.recordset[0].Available);
+
             let prereqProc = pool.request().query(`EXEC CheckPrereq ${s_id}, ${c_id};`);
+            let res1 = await prereqProc;
+            prereqStatus = JSON.parse(res1.recordset[0].result);
+
             let conflictProc = pool.request().query(`EXEC CheckTimeConflict ${s_id}, '${semester}', ${year}, '${start}', '${end}';`);
-            
-            return Promise.all([capProc, prereqProc, conflictProc]);
+            let res2 = await conflictProc;
+            conflictStatus = JSON.parse(res2.recordset[0].Result);
+
+            console.log(capacityStatus && prereqStatus && conflictStatus);
+
+            if (!(capacityStatus && prereqStatus && conflictStatus)) {
+                return false;
+            } else {
+                pool.request().query(`INSERT INTO dbo.Takes VALUES ('${sec_id}', '${c_id}', '${ts_id}', '${i_id}', '${semester}', '${year}', '${s_id}');`);
+                return true;
+            }
+            //return Promise.all([capProc, prereqProc, conflictProc]);
         }
         catch(err){
             console.log(err)
