@@ -137,7 +137,7 @@
     transition: padding 0.3s;
     transition: width 0.3s, height 0.3s, left 0.3s, right 0.3s, top 0.3s, bottom 0.3s;
     width: 100%;
-    padding: 40px 32px 0px;
+    padding: 40px 32px 0px 80px;
     display: grid;
     align-items: stretch;
 }
