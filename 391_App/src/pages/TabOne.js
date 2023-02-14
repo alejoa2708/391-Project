@@ -26,7 +26,7 @@ const convertTime = (date) => {
     hour: "2-digit",
     minute: "2-digit",
   });
-  return time;
+  return time.toString();
 };
 
 const TabOne = () => {
@@ -157,6 +157,8 @@ const TabOne = () => {
             "Enrolment Failed. Return an error message here later..."
           );
           setOpenFailure(true);
+          console.log(start)
+          console.log(end)
           return;
         }
         setOpenSuccess(true);
@@ -169,14 +171,14 @@ const TabOne = () => {
   }
 
   const studentColumns = [
-    { field: "id", headerName: "ID", width: 50 },
+    { field: "id", headerName: "ID", width: 75 },
     { field: "first_name", headerName: "First Name", width: 125 },
     { field: "last_name", headerName: "Last Name", width: 125 },
     { field: "gender", headerName: "Gender", width: 100, hide: true },
   ];
 
   const courseColumns = [
-    { field: "id", headerName: "ID", width: 50 },
+    { field: "id", headerName: "ID", width: 75 },
     { field: "course_name", headerName: "Course", width: 150 },
     { field: "credits", headerName: "Credits", width: 100, hide: true },
     { field: "department", headerName: "Department", width: 100, hide: true },
@@ -191,7 +193,7 @@ const TabOne = () => {
 
   return (
     <>
-      <div style={{ height: "90vh", width: "100%" }}>
+      <div style={{ height: "89vh", width: "100%" }}>
         <div
           style={{
             display: "flex",
@@ -229,7 +231,7 @@ const TabOne = () => {
           </Button>
         </div>
         <div style={{ display: "flex", height: "60%" }}>
-          <div style={{ width: "45%", height: "100%", padding: "10px" }}>
+          <div style={{ width: "35%", height: "100%", padding: "10px" }}>
             {filteredStudentRows.length > 0 ? (
               <DataGrid
                 rows={filteredStudentRows}

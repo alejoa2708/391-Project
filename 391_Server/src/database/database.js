@@ -63,7 +63,7 @@ class Database {
             let pool = await this.sql.connect(this.config);
             var query = `
                         SELECT title as c_name, d_name, credits, c_id, D.d_id
-                        FROM Course as C, Depasrtment as D
+                        FROM Course as C, Department as D
                         WHERE C.d_id = D.d_id AND D.d_id = %` + first + `%;
                         `
             let course = pool.request().query(query);
@@ -87,6 +87,29 @@ class Database {
                         FROM dbo.Course as C 
                         JOIN dbo.Section as S ON C.c_id = S.c_id 
                         JOIN dbo.Timeslot as TS ON S.ts_id = TS.ts_id;
+                        `
+            let course = pool.request().query(query);
+            //console.log(course);
+            return course;
+        }
+        catch(err){
+            console.log(err)
+        }
+    }
+
+    /**
+     * 
+     * @returns 
+     */
+    getStudentsTakenCourses = async() => {
+        try{
+            let pool = await this.sql.connect(this.config);
+            var query = `
+                        SELECT distinct S.s_id, S.first_name, S.last_name, SC.sec_id, SC.i_id, SC.semester, SC.year, SC.ts_id 
+                        FROM dbo.Student as S 
+                        JOIN dbo.Section as SC ON S.s_id = SC.sec_id 
+                        JOIN dbo.Course as C ON C.c_id = SC.c_id
+                        JOIN dbo.Takes as T ON T.sec_id = SC.sec_id;
                         `
             let course = pool.request().query(query);
             //console.log(course);
