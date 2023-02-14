@@ -47,15 +47,15 @@ BEGIN
 							FROM Prereq
 							WHERE c_id = @Course)) > 0
 	BEGIN
-		SELECT 'True' as result
+		SELECT 'true' as result
 	END
 	ELSE IF (SELECT p_id FROM Prereq Where c_id = @Course) = -1
 	BEGIN
-		SELECT 'True' as result
+		SELECT 'true' as result
 	END
 	ELSE
 	BEGIN
-		SELECT 'False' as result
+		SELECT 'false' as result
 	END;
 END;
 

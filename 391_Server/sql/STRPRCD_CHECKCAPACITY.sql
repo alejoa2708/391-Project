@@ -18,8 +18,8 @@ AS
 BEGIN
     SELECT 
         CASE 
-            WHEN enrolled < 30 THEN 'TRUE'
-            ELSE 'FALSE' 
+            WHEN enrolled < 30 THEN 'true'
+            ELSE 'false' 
         END AS Available
     FROM 
         CoursesAndSections
