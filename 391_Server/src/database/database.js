@@ -94,9 +94,8 @@ class Database {
             let pool = await this.sql.connect(this.config);
             var query = `
                         SELECT C.c_id, C.title, C.d_id, S.sec_id, S.i_id, S.semester, S.year, S.ts_id, TS.start_time, TS.end_time 
-                        FROM dbo.Course as C 
-                        JOIN dbo.Section as S ON C.c_id = S.c_id 
-                        JOIN dbo.Timeslot as TS ON S.ts_id = TS.ts_id;
+                        FROM dbo.Course as C, dbo.Section as S, dbo.Timeslot as TS 
+                        WHERE C.c_id = S.c_id AND S.ts_id = TS.ts_id;
                         `
             let course = pool.request().query(query);
             //console.log(course);
@@ -115,11 +114,9 @@ class Database {
         try{
             let pool = await this.sql.connect(this.config);
             var query = `
-                        SELECT distinct S.s_id, S.first_name, S.last_name, SC.sec_id, SC.i_id, SC.semester, SC.year, SC.ts_id 
-                        FROM dbo.Student as S 
-                        JOIN dbo.Section as SC ON S.s_id = SC.sec_id 
-                        JOIN dbo.Course as C ON C.c_id = SC.c_id
-                        JOIN dbo.Takes as T ON T.sec_id = SC.sec_id;
+                        SELECT T.sec_id, T.i_id, T.c_id, C.title, T.semester, T.year, T.s_id, S.first_name, S.last_name, TS.start_time, TS.end_time
+                        FROM dbo.Takes as T, dbo.Student as S, dbo.Section as SC, dbo.Timeslot as TS, dbo.Course as C
+                        WHERE T.s_id = S.s_id AND SC.sec_id = T.sec_id AND TS.ts_id = T.ts_id AND C.c_id = T.c_id;
                         `
             let course = pool.request().query(query);
             //console.log(course);

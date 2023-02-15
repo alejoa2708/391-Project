@@ -49,7 +49,7 @@ class API {
         router.post('/filterFirstLast', this.filterFirstLast.bind(this));
         router.post('/getCourses', this.getCourses.bind(this));
         router.post('/filterCoursesByDept', this.filterCoursesByDept.bind(this));
-        router.post('/getDepartments', this.getDepartments.bind(this));
+        router.post('/getStudentsTakenCourses', this.getStudentsTakenCourses.bind(this));
     }
 
     /**
@@ -111,10 +111,10 @@ class API {
      * 
      * @param response Response to the client indicating the success status.
      */
-    getDepartments(request, response) {
+    getStudentsTakenCourses(request, response) {
         let body = request.body;
             
-        this.database.getDepartments().then(res => {
+        this.database.getStudentsTakenCourses().then(res => {
             //console.log(res);
             response.json(res);
         });

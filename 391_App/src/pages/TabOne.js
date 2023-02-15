@@ -77,9 +77,11 @@ const TabOne = () => {
 
   const prepCourseRows = (courses) => {
     const data = [];
+    let counter = 0;
     courses.map((item) =>
       data.push({
-        id: item.c_id,
+        id: counter++,
+        cid: item.c_id,
         course_name: item.title,
         credits: item.credits,
         department: item.d_id,
@@ -117,11 +119,6 @@ const TabOne = () => {
     setSelectCourse(row);
   };
 
-  const handleConfirm = () => {
-    console.log("insert into takes now");
-    setOpenSuccess(false);
-  };
-
   function handleEnroll() {
     if (!selectStudent || !selectCourse) {
       console.error("Invalid Input(s) - Select a student AND a course");
@@ -130,7 +127,7 @@ const TabOne = () => {
       console.log(selectCourse.row);
 
       let studentID = selectStudent.row.id;
-    	let courseID = selectCourse.row.id; 
+    	let courseID = selectCourse.row.cid; 
 		let sectionID = selectCourse.row.sec;
 		let semester = selectCourse.row.sem;
 		let year = selectCourse.row.year;
@@ -178,11 +175,11 @@ const TabOne = () => {
   ];
 
   const courseColumns = [
-    { field: "id", headerName: "ID", width: 75 },
-    { field: "course_name", headerName: "Course", width: 150 },
-    { field: "credits", headerName: "Credits", width: 100, hide: true },
+    { field: "id", headerName: "ID", width: 75, hide: true },
+    { field: "cid", headerName: "Course ID", width: 75 },
+    { field: "course_name", headerName: "Course", width: 200 },
     { field: "department", headerName: "Department", width: 100, hide: true },
-    { field: "sec", headerName: "Section", width: 70 },
+    { field: "sec", headerName: "Section ID", width: 70 },
     { field: "sem", headerName: "Semester", width: 70 },
     { field: "year", headerName: "Year", width: 70 },
     { field: "start", headerName: "Start Time", width: 100 },
@@ -288,17 +285,17 @@ const TabOne = () => {
         >
           <Box sx={style}>
             <Typography id="modal-modal-title" variant="h6" component="h2">
-              Success
+              Student Enrolled Successfully
             </Typography>
             <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-              lOOKING GOOD, CONFIRM ENROLLMENT?
+              This student now has the chosen class in their schedule.
             </Typography>
             <Button
               variant="contained"
-              onClick={() => handleConfirm()}
+              onClick={() => setOpenSuccess(false)}
               sx={{ p: 1, mt: 2 }}
             >
-              Confirm
+              Close
             </Button>
           </Box>
         </Modal>
@@ -310,11 +307,13 @@ const TabOne = () => {
         >
           <Box sx={style}>
             <Typography id="modal-modal-title" variant="h6" component="h2">
-              Failure
+            Failure to Enroll Student
             </Typography>
             <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-              check ur prereqs, time conflicts, and the class capacity something
-              there sucks and not letting you in
+              Possible reasons could be a missing
+              prerequisite class, a schedule time conflict, or a full class.
+              Student may already be enrolled or there was an error in the
+              system. Please check everything before trying again.
             </Typography>
           </Box>
         </Modal>
