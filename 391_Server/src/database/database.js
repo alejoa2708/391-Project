@@ -45,12 +45,22 @@ class Database {
             await transactions.begin();
             try {
                 if (!(capacityStatus && prereqStatus && conflictStatus)) {
-                    return false;
+                    
+                    if (!capacityStatus) {
+                        return { success: false, procedure: "capacity check" };
+                    }
+                    if (!prereqStatus) {
+                        return { success: false, procedure: "pre-requisits check" };
+                    }
+                    if (!conflictStatus) {
+                        return { success: false, procedure: "time conflict check" };
+                    }
+                    //return false;
                 } else {
                     pool.request(transactions).query(`INSERT INTO dbo.Takes VALUES ('${sec_id}', '${c_id}', '${ts_id}', '${i_id}', '${semester}', '${year}', '${s_id}');
                                         UPDATE dbo.Section SET enrolled = enrolled + 1 WHERE sec_id = ${sec_id} AND c_id = ${c_id};`);
                     await transactions.commit();
-                    return true;
+                    return { success: true };
                 } 
             } catch (error) {
                 await transactions.rollback();
@@ -165,10 +175,6 @@ class Database {
         try{
             let pool = await this.sql.connect(this.config);
             let data = pool.request().query(`SELECT * FROM Student WHERE first_name='${email}'`);
-
-            console.log(data);
-            
-
             return data;
         }
         catch(err){

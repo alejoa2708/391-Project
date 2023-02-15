@@ -99,8 +99,8 @@ class API {
         
         this.database.enrollStudent(body.studentID, body.courseID, body.sectionID, body.semester, body.year, body.start, body.end, body.takesID, body.instructorID).then(res => {
             
-            if (!res){
-                response.json({ success: false });
+            if (!res.success){
+                response.json({ success: false, procedure: res.procedure });
             } else {
                 response.json({ success: true });
             }

@@ -154,7 +154,7 @@ const TabOne = () => {
       }).then((response) => {
         if (!response || !response.data || !response.data.success) {
           console.error(
-            "Enrolment Failed. Return an error message here later..."
+            `Enrolment Failed. Failure in ${response.data.procedure}...`
           );
           setOpenFailure(true);
           return;
