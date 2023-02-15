@@ -41,12 +41,22 @@ class Database {
 
             console.log(capacityStatus && prereqStatus && conflictStatus);
 
-            if (!(capacityStatus && prereqStatus && conflictStatus)) {
-                return false;
-            } else {
-                pool.request().query(`INSERT INTO dbo.Takes VALUES ('${sec_id}', '${c_id}', '${ts_id}', '${i_id}', '${semester}', '${year}', '${s_id}');`);
-                return true;
+            var transactions = new this.sql.Transaction()       //Transaction class to ensure transaction occurs
+            await transactions.begin();
+            try {
+                if (!(capacityStatus && prereqStatus && conflictStatus)) {
+                    return false;
+                } else {
+                    pool.request(transactions).query(`INSERT INTO dbo.Takes VALUES ('${sec_id}', '${c_id}', '${ts_id}', '${i_id}', '${semester}', '${year}', '${s_id}');
+                                        UPDATE dbo.Section SET enrolled = enrolled + 1 WHERE sec_id = ${sec_id} AND c_id = ${c_id};`);
+                    await transactions.commit();
+                    return true;
+                } 
+            } catch (error) {
+                await transactions.rollback();
+                console.log(error)
             }
+
             //return Promise.all([capProc, prereqProc, conflictProc]);
         }
         catch(err){
