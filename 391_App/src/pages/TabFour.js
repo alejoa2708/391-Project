@@ -84,6 +84,25 @@ const TabFour = () => {
     queryBuilder(gender, department, instructorTitle, year, term, courseTitle)
   }, [gender, department, instructorTitle, year, term, courseTitle]);
 
+  /**
+   * Filter button function. Takes the created query from queryBuilder and sends it as a request.
+   * Updates and filters the courses tables if succeeds.
+   */
+  function handleFilter() {
+    let query = queryBuilder();
+    Helper.post(Helper.getAPIUrl("filterCourses"), {
+      query
+    }).then((response) => {
+      if (!response || !response.data || !response.data.success) {
+        console.error(
+          `Something went wrong...`
+        );
+        return;
+      }
+      return;
+    });
+  }
+
   return (
     <>
       <div style={{ height: "89vh", width: "100%" }}>
