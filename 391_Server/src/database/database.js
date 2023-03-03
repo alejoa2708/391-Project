@@ -6,7 +6,22 @@ class Database {
     constructor() {
         this.config = Config;
         this.sql = SQL;
-        //this.sanitizer = Sanitizer;
+    }
+
+    /**
+     * Retrieves filetered courses based on the requested query.
+     * @param {*} query 
+     * @returns 
+     */
+    filterCourses = async(query) => {
+        try{
+            let pool = await this.sql.connect(this.config);
+            let course = pool.request().query(query);
+            return course;
+        }
+        catch(err){
+            console.log(err)
+        }
     }
 
     /**
