@@ -45,12 +45,22 @@ class Database {
             await transactions.begin();
             try {
                 if (!(capacityStatus && prereqStatus && conflictStatus)) {
-                    return false;
+                    
+                    if (!capacityStatus) {
+                        return { success: false, procedure: "capacity check" };
+                    }
+                    if (!prereqStatus) {
+                        return { success: false, procedure: "pre-requisits check" };
+                    }
+                    if (!conflictStatus) {
+                        return { success: false, procedure: "time conflict check" };
+                    }
+                    //return false;
                 } else {
                     pool.request(transactions).query(`INSERT INTO dbo.Takes VALUES ('${sec_id}', '${c_id}', '${ts_id}', '${i_id}', '${semester}', '${year}', '${s_id}');
                                         UPDATE dbo.Section SET enrolled = enrolled + 1 WHERE sec_id = ${sec_id} AND c_id = ${c_id};`);
                     await transactions.commit();
-                    return true;
+                    return { success: true };
                 } 
             } catch (error) {
                 await transactions.rollback();
@@ -73,7 +83,7 @@ class Database {
             let pool = await this.sql.connect(this.config);
             var query = `
                         SELECT title as c_name, d_name, credits, c_id, D.d_id
-                        FROM Course as C, Depasrtment as D
+                        FROM Course as C, Department as D
                         WHERE C.d_id = D.d_id AND D.d_id = %` + first + `%;
                         `
             let course = pool.request().query(query);
@@ -94,9 +104,29 @@ class Database {
             let pool = await this.sql.connect(this.config);
             var query = `
                         SELECT C.c_id, C.title, C.d_id, S.sec_id, S.i_id, S.semester, S.year, S.ts_id, TS.start_time, TS.end_time 
-                        FROM dbo.Course as C 
-                        JOIN dbo.Section as S ON C.c_id = S.c_id 
-                        JOIN dbo.Timeslot as TS ON S.ts_id = TS.ts_id;
+                        FROM dbo.Course as C, dbo.Section as S, dbo.Timeslot as TS 
+                        WHERE C.c_id = S.c_id AND S.ts_id = TS.ts_id;
+                        `
+            let course = pool.request().query(query);
+            //console.log(course);
+            return course;
+        }
+        catch(err){
+            console.log(err)
+        }
+    }
+
+    /**
+     * 
+     * @returns 
+     */
+    getStudentsTakenCourses = async() => {
+        try{
+            let pool = await this.sql.connect(this.config);
+            var query = `
+                        SELECT T.sec_id, T.i_id, T.c_id, C.title, T.semester, T.year, T.s_id, S.first_name, S.last_name, TS.start_time, TS.end_time
+                        FROM dbo.Takes as T, dbo.Student as S, dbo.Section as SC, dbo.Timeslot as TS, dbo.Course as C
+                        WHERE T.s_id = S.s_id AND SC.sec_id = T.sec_id AND TS.ts_id = T.ts_id AND C.c_id = T.c_id;
                         `
             let course = pool.request().query(query);
             //console.log(course);
@@ -165,10 +195,6 @@ class Database {
         try{
             let pool = await this.sql.connect(this.config);
             let data = pool.request().query(`SELECT * FROM Student WHERE first_name='${email}'`);
-
-            console.log(data);
-            
-
             return data;
         }
         catch(err){

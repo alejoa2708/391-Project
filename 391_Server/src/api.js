@@ -49,7 +49,7 @@ class API {
         router.post('/filterFirstLast', this.filterFirstLast.bind(this));
         router.post('/getCourses', this.getCourses.bind(this));
         router.post('/filterCoursesByDept', this.filterCoursesByDept.bind(this));
-        router.post('/getDepartments', this.getDepartments.bind(this));
+        router.post('/getStudentsTakenCourses', this.getStudentsTakenCourses.bind(this));
     }
 
     /**
@@ -99,8 +99,8 @@ class API {
         
         this.database.enrollStudent(body.studentID, body.courseID, body.sectionID, body.semester, body.year, body.start, body.end, body.takesID, body.instructorID).then(res => {
             
-            if (!res){
-                response.json({ success: false });
+            if (!res.success){
+                response.json({ success: false, procedure: res.procedure });
             } else {
                 response.json({ success: true });
             }
@@ -111,10 +111,10 @@ class API {
      * 
      * @param response Response to the client indicating the success status.
      */
-    getDepartments(request, response) {
+    getStudentsTakenCourses(request, response) {
         let body = request.body;
             
-        this.database.getDepartments().then(res => {
+        this.database.getStudentsTakenCourses().then(res => {
             //console.log(res);
             response.json(res);
         });
