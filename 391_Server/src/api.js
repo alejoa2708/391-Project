@@ -43,6 +43,7 @@ class API {
         // Blank get response when someone attempts to connect to the API directly.
         router.get('/', this.handleRoot.bind(this));
 
+        // Part 1 stuff
         router.post('/login', this.handleLogin.bind(this));
         router.post('/enroll', this.handleEnrollStudent.bind(this));
         router.post('/getStudents', this.getStudents.bind(this));
@@ -50,15 +51,38 @@ class API {
         router.post('/getCourses', this.getCourses.bind(this));
         router.post('/filterCoursesByDept', this.filterCoursesByDept.bind(this));
         router.post('/getStudentsTakenCourses', this.getStudentsTakenCourses.bind(this));
+
+        // Part 2 stuff
+        router.post('/filterCourses', this.filterCourses.bind(this));
+
     }
 
     /**
-     * Handles the root response when making a GET request directly to the server.
-     * @param request The request passed on.
-     * @param response The response that we send back to the client/browser/etc.
+     * Retrieves data from database based from request.
+     * @param {*} request 
+     * @param {*} response 
+     * @returns None or success json
      */
-    handleRoot(request, response) {
-        response.json({ response: 'lmao something happened here kek.' });
+    filterCourses(request, response) {
+        let body = request.body;
+
+        // Empty/invalid query
+        if (!body || !body.query) {
+            console.log("body in API filterCourses is empty");
+            return;
+        }
+
+        this.database.filterCourses(body.query).then(res => {
+            
+            if(!res) {
+                console.log("response in API filterCourses is empty");
+                response.json({ success: false });
+            } else{
+               //console.log(true);
+               response.json({ success: true });
+            }
+           
+       });
     }
 
     /**
@@ -121,7 +145,7 @@ class API {
     }
 
     /**
-     * 
+     * Course getter method. Retrieves courses data.
      * @param response Response to the client indicating the success status.
      */
      getCourses(request, response) {
@@ -175,6 +199,8 @@ class API {
             response.json(res);
         });
     }
+
+
     
 }
 module.exports = API;
