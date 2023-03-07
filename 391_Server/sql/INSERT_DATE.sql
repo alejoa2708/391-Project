@@ -1,135 +1,138 @@
-INSERT INTO Date (Date_ID, Year, Term) VALUES (1, 1990, 1);
-INSERT INTO Date (Date_ID, Year, Term) VALUES (2, 1990, 2);
-INSERT INTO Date (Date_ID, Year, Term) VALUES (3, 1990, 3);
+INSERT INTO Date (Date_ID, Year, semester) VALUES (1, 1990, 'FAL');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (2, 1990, 'WIN');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (3, 1990, 'SPR');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (4, 1990, 'SUM');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (5, 1991, 'FAL');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (6, 1991, 'WIN');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (7, 1991, 'SPR');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (8, 1991, 'SUM');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (9, 1992, 'FAL');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (10, 1992, 'WIN');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (11, 1992, 'SPR');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (12, 1992, 'SUM');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (13, 1993, 'FAL');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (14, 1993, 'WIN');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (15, 1993, 'SPR');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (16, 1993, 'SUM');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (17, 1994, 'FAL');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (18, 1994, 'WIN');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (19, 1994, 'SPR');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (20, 1994, 'SUM');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (21, 1995, 'FAL');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (22, 1995, 'WIN');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (23, 1995, 'SPR');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (24, 1995, 'SUM');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (25, 1996, 'FAL');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (26, 1996, 'WIN');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (27, 1996, 'SPR');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (28, 1996, 'SUM');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (29, 1997, 'FAL');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (30, 1997, 'WIN');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (31, 1997, 'SPR');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (32, 1997, 'SUM');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (33, 1998, 'FAL');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (34, 1998, 'WIN');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (35, 1998, 'SPR');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (36, 1998, 'SUM');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (37, 1999, 'FAL');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (38, 1999, 'WIN');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (39, 1999, 'SPR');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (40, 1999, 'SUM');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (41, 2000, 'FAL');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (42, 2000, 'WIN');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (43, 2000, 'SPR');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (44, 2000, 'SUM');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (45, 2001, 'FAL');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (46, 2001, 'WIN');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (47, 2001, 'SPR');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (48, 2001, 'SUM');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (49, 2002, 'FAL');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (50, 2002, 'WIN');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (51, 2002, 'SPR');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (52, 2002, 'SUM');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (53, 2003, 'FAL');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (54, 2003, 'WIN');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (55, 2003, 'SPR');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (56, 2003, 'SUM');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (57, 2004, 'FAL');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (58, 2004, 'WIN');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (59, 2004, 'SPR');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (60, 2004, 'SUM');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (61, 2005, 'FAL');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (62, 2005, 'WIN');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (63, 2005, 'SPR');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (64, 2005, 'SUM');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (65, 2006, 'FAL');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (66, 2006, 'WIN');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (67, 2006, 'SPR');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (68, 2006, 'SUM');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (69, 2007, 'FAL');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (70, 2007, 'WIN');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (71, 2007, 'SPR');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (72, 2007, 'SUM');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (73, 2008, 'FAL');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (74, 2008, 'WIN');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (75, 2008, 'SPR');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (76, 2008, 'SUM');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (77, 2009, 'FAL');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (78, 2009, 'WIN');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (79, 2009, 'SPR');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (80, 2009, 'SUM');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (81, 2010, 'FAL');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (82, 2010, 'WIN');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (83, 2010, 'SPR');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (84, 2010, 'SUM');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (85, 2011, 'FAL');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (86, 2011, 'WIN');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (87, 2011, 'SPR');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (88, 2011, 'SUM');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (89, 2012, 'FAL');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (90, 2012, 'WIN');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (91, 2012, 'SPR');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (92, 2012, 'SUM');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (93, 2013, 'FAL');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (94, 2013, 'WIN');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (95, 2013, 'SPR');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (96, 2013, 'SUM');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (97, 2014, 'FAL');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (98, 2014, 'WIN');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (99, 2014, 'SPR');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (100, 2014, 'SUM');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (101, 2015, 'FAL');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (102, 2015, 'WIN');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (103, 2015, 'SPR');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (104, 2015, 'SUM');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (105, 2016, 'FAL');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (106, 2016, 'WIN');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (107, 2016, 'SPR');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (108, 2016, 'SUM');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (109, 2017, 'FAL');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (110, 2017, 'WIN');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (111, 2017, 'SPR');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (112, 2017, 'SUM');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (113, 2018, 'FAL');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (114, 2018, 'WIN');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (115, 2018, 'SPR');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (116, 2018, 'SUM');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (117, 2019, 'FAL');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (118, 2019, 'WIN');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (119, 2019, 'SPR');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (120, 2019, 'SUM');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (121, 2020, 'FAL');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (122, 2020, 'WIN');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (123, 2020, 'SPR');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (124, 2020, 'SUM');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (125, 2021, 'FAL');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (126, 2021, 'WIN');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (127, 2021, 'SPR');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (128, 2021, 'SUM');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (129, 2022, 'FAL');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (130, 2022, 'WIN');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (131, 2022, 'SPR');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (132, 2022, 'SUM');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (133, 2023, 'FAL');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (134, 2023, 'WIN');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (135, 2023, 'SPR');
+INSERT INTO Date (Date_ID, Year, semester) VALUES (136, 2023, 'SUM');
 
-INSERT INTO Date (Date_ID, Year, Term) VALUES (4, 1991, 1);
-INSERT INTO Date (Date_ID, Year, Term) VALUES (5, 1991, 2);
-INSERT INTO Date (Date_ID, Year, Term) VALUES (6, 1991, 3);
 
-INSERT INTO Date (Date_ID, Year, Term) VALUES (7, 1992, 1);
-INSERT INTO Date (Date_ID, Year, Term) VALUES (8, 1992, 2);
-INSERT INTO Date (Date_ID, Year, Term) VALUES (9, 1992, 3);
-
-INSERT INTO Date (Date_ID, Year, Term) VALUES (10, 1993, 1);
-INSERT INTO Date (Date_ID, Year, Term) VALUES (11, 1993, 2);
-INSERT INTO Date (Date_ID, Year, Term) VALUES (12, 1993, 3);
-
-INSERT INTO Date (Date_ID, Year, Term) VALUES (13, 1994, 1);
-INSERT INTO Date (Date_ID, Year, Term) VALUES (14, 1994, 2);
-INSERT INTO Date (Date_ID, Year, Term) VALUES (15, 1994, 3);
-
-INSERT INTO Date (Date_ID, Year, Term) VALUES (16, 1995, 1);
-INSERT INTO Date (Date_ID, Year, Term) VALUES (17, 1995, 2);
-INSERT INTO Date (Date_ID, Year, Term) VALUES (18, 1995, 3);
-
-INSERT INTO Date (Date_ID, Year, Term) VALUES (19, 1996, 1);
-INSERT INTO Date (Date_ID, Year, Term) VALUES (20, 1996, 2);
-INSERT INTO Date (Date_ID, Year, Term) VALUES (21, 1996, 3);
-
-INSERT INTO Date (Date_ID, Year, Term) VALUES (22, 1997, 1);
-INSERT INTO Date (Date_ID, Year, Term) VALUES (23, 1997, 2);
-INSERT INTO Date (Date_ID, Year, Term) VALUES (24, 1997, 3);
-
-INSERT INTO Date (Date_ID, Year, Term) VALUES (25, 1998, 1);
-INSERT INTO Date (Date_ID, Year, Term) VALUES (26, 1998, 2);
-INSERT INTO Date (Date_ID, Year, Term) VALUES (27, 1998, 3);
-
-INSERT INTO Date (Date_ID, Year, Term) VALUES (28, 1999, 1);
-INSERT INTO Date (Date_ID, Year, Term) VALUES (29, 1999, 2);
-INSERT INTO Date (Date_ID, Year, Term) VALUES (30, 1999, 3);
-
-INSERT INTO Date (Date_ID, Year, Term) VALUES (31, 2000, 1);
-INSERT INTO Date (Date_ID, Year, Term) VALUES (32, 2000, 2);
-INSERT INTO Date (Date_ID, Year, Term) VALUES (33, 2000, 3);
-
-INSERT INTO Date (Date_ID, Year, Term) VALUES (34, 2001, 1);
-INSERT INTO Date (Date_ID, Year, Term) VALUES (35, 2001, 2);
-INSERT INTO Date (Date_ID, Year, Term) VALUES (36, 2001, 3);
-
-INSERT INTO Date (Date_ID, Year, Term) VALUES (37, 2002, 1);
-INSERT INTO Date (Date_ID, Year, Term) VALUES (38, 2002, 2);
-INSERT INTO Date (Date_ID, Year, Term) VALUES (39, 2002, 3);
-
-INSERT INTO Date (Date_ID, Year, Term) VALUES (40, 2003, 1);
-INSERT INTO Date (Date_ID, Year, Term) VALUES (41, 2003, 2);
-INSERT INTO Date (Date_ID, Year, Term) VALUES (42, 2003, 3);
-
-INSERT INTO Date (Date_ID, Year, Term) VALUES (43, 2004, 1);
-INSERT INTO Date (Date_ID, Year, Term) VALUES (44, 2004, 2);
-INSERT INTO Date (Date_ID, Year, Term) VALUES (45, 2004, 3);
-
-INSERT INTO Date (Date_ID, Year, Term) VALUES (46, 2005, 1);
-INSERT INTO Date (Date_ID, Year, Term) VALUES (47, 2005, 2);
-INSERT INTO Date (Date_ID, Year, Term) VALUES (48, 2005, 3);
-
-INSERT INTO Date (Date_ID, Year, Term) VALUES (49, 2006, 1);
-INSERT INTO Date (Date_ID, Year, Term) VALUES (50, 2006, 2);
-INSERT INTO Date (Date_ID, Year, Term) VALUES (51, 2006, 3);
-
-INSERT INTO Date (Date_ID, Year, Term) VALUES (52, 2007, 1);
-INSERT INTO Date (Date_ID, Year, Term) VALUES (53, 2007, 2);
-INSERT INTO Date (Date_ID, Year, Term) VALUES (54, 2007, 3);
-
-INSERT INTO Date (Date_ID, Year, Term) VALUES (55, 2008, 1);
-INSERT INTO Date (Date_ID, Year, Term) VALUES (56, 2008, 2);
-INSERT INTO Date (Date_ID, Year, Term) VALUES (57, 2008, 3);
-
-INSERT INTO Date (Date_ID, Year, Term) VALUES (58, 2009, 1);
-INSERT INTO Date (Date_ID, Year, Term) VALUES (59, 2009, 2);
-INSERT INTO Date (Date_ID, Year, Term) VALUES (60, 2009, 3);
-
-INSERT INTO Date (Date_ID, Year, Term) VALUES (61, 2010, 1);
-INSERT INTO Date (Date_ID, Year, Term) VALUES (62, 2010, 2);
-INSERT INTO Date (Date_ID, Year, Term) VALUES (63, 2010, 3);
-
-INSERT INTO Date (Date_ID, Year, Term) VALUES (64, 2011, 1);
-INSERT INTO Date (Date_ID, Year, Term) VALUES (65, 2011, 2);
-INSERT INTO Date (Date_ID, Year, Term) VALUES (66, 2011, 3);
-
-INSERT INTO Date (Date_ID, Year, Term) VALUES (67, 2012, 1);
-INSERT INTO Date (Date_ID, Year, Term) VALUES (68, 2012, 2);
-INSERT INTO Date (Date_ID, Year, Term) VALUES (69, 2012, 3);
-
-INSERT INTO Date (Date_ID, Year, Term) VALUES (70, 2013, 1);
-INSERT INTO Date (Date_ID, Year, Term) VALUES (71, 2013, 2);
-INSERT INTO Date (Date_ID, Year, Term) VALUES (72, 2013, 3);
-
-INSERT INTO Date (Date_ID, Year, Term) VALUES (73, 2014, 1);
-INSERT INTO Date (Date_ID, Year, Term) VALUES (74, 2014, 2);
-INSERT INTO Date (Date_ID, Year, Term) VALUES (75, 2014, 3);
-
-INSERT INTO Date (Date_ID, Year, Term) VALUES (76, 2015, 1);
-INSERT INTO Date (Date_ID, Year, Term) VALUES (77, 2015, 2);
-INSERT INTO Date (Date_ID, Year, Term) VALUES (78, 2015, 3);
-
-INSERT INTO Date (Date_ID, Year, Term) VALUES (79, 2016, 1);
-INSERT INTO Date (Date_ID, Year, Term) VALUES (80, 2016, 2);
-INSERT INTO Date (Date_ID, Year, Term) VALUES (81, 2016, 3);
-
-INSERT INTO Date (Date_ID, Year, Term) VALUES (82, 2017, 1);
-INSERT INTO Date (Date_ID, Year, Term) VALUES (83, 2017, 2);
-INSERT INTO Date (Date_ID, Year, Term) VALUES (84, 2017, 3);
-
-INSERT INTO Date (Date_ID, Year, Term) VALUES (85, 2018, 1);
-INSERT INTO Date (Date_ID, Year, Term) VALUES (86, 2018, 2);
-INSERT INTO Date (Date_ID, Year, Term) VALUES (87, 2018, 3);
-
-INSERT INTO Date (Date_ID, Year, Term) VALUES (88, 2019, 1);
-INSERT INTO Date (Date_ID, Year, Term) VALUES (89, 2019, 2);
-INSERT INTO Date (Date_ID, Year, Term) VALUES (90, 2019, 3);
-
-INSERT INTO Date (Date_ID, Year, Term) VALUES (91, 2020, 1);
-INSERT INTO Date (Date_ID, Year, Term) VALUES (92, 2020, 2);
-INSERT INTO Date (Date_ID, Year, Term) VALUES (93, 2020, 3);
-
-INSERT INTO Date (Date_ID, Year, Term) VALUES (94, 2021, 1);
-INSERT INTO Date (Date_ID, Year, Term) VALUES (95, 2021, 2);
-INSERT INTO Date (Date_ID, Year, Term) VALUES (96, 2021, 3);
-
-INSERT INTO Date (Date_ID, Year, Term) VALUES (97, 2022, 2);
-INSERT INTO Date (Date_ID, Year, Term) VALUES (98, 2022, 2);
-INSERT INTO Date (Date_ID, Year, Term) VALUES (99, 2022, 3);
-
-INSERT INTO Date (Date_ID, Year, Term) VALUES (100, 2023, 1);
-INSERT INTO Date (Date_ID, Year, Term) VALUES (101, 2023, 2);
-INSERT INTO Date (Date_ID, Year, Term) VALUES (102, 2023, 3);
