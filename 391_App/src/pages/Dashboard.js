@@ -174,41 +174,12 @@ const Dashboard = () => {
 						</IonContent>
 					</aside>
 					
-						<IonGrid id='item-grid'>
-							{tab1 && <TabOne />}
-							{tab2 && <TabTwo />}
-							{tab3 && <TabThree />}
-							{tab4 && <TabFour />}
-								
-							{/* <IonRow id='item-main-row'> 
-								<IonCol id='layout-col'>
-									
-									<div>
-										<IonTitle>
-											Layout box
-											<IonIcon className='expand-btn' icon={expandOutline} size='small'></IonIcon>
-										</IonTitle>
-									</div>
-									
-									<IonRow id='layout-items-row'>
-
-										{items}
-										
-									</IonRow>
-								</IonCol>
-
-								<IonCol id='media-col'>
-									<div>
-										<IonTitle>
-											Media box?
-											<IonIcon className='expand-btn' icon={expandOutline} size='small'></IonIcon>
-										</IonTitle>
-									</div>
-								</IonCol>
-							</IonRow>
-						*/}
-							
-						</IonGrid>
+					<IonGrid id='item-grid'>
+						{tab1 && <TabOne />}
+						{tab2 && <TabTwo />}
+						{tab3 && <TabThree />}
+						{tab4 && <TabFour />}
+					</IonGrid>
 								
 				</div>
 
