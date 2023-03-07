@@ -15,10 +15,10 @@ const Dashboard = () => {
 	const [layoutItems, setLayout] = useState([]);  // layout item holder
 	const [sidebar, setSidebar] = useState(false);	// Sets nav side bar state to false (closed)
 	const showSidebar = () => setSidebar(!sidebar); // Triggering sidebar to expand
-	const [tab1, setTab1] = useState(true);
+	const [tab1, setTab1] = useState(false);
 	const [tab2, setTab2] = useState(false);
 	const [tab3, setTab3] = useState(false);
-	const [tab4, setTab4] = useState(false);
+	const [tab4, setTab4] = useState(true);
 	const history = useHistory();
 
 	function onSelectMenu (elementId){
@@ -62,24 +62,6 @@ const Dashboard = () => {
 		history.push(path);
 		window.location.reload();
 	  }
-
-	/** 
-	 * Gets the list of items from API response and stores the data into layout item holder 
-	 * for displaying in current viewport
-	 */ 
-	/* useEffect(()=>{
-		
-		axios.get('http://192.168.1.173:9091/api/v1/layouts')
-		  .then(res=>{
-			//console.log(res.data);
-			setLayout(res.data);
-			//console.log(layoutItems);
-		  })
-		  .catch(err=>{
-			console.log(err);
-		  })
-	 }, []) */
-
 
 	/**
 	 * Send error of parameter 'message' to the 'errorMessage' in 

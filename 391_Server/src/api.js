@@ -41,7 +41,7 @@ class API {
      */
     async handle(router) {
         // Blank get response when someone attempts to connect to the API directly.
-        router.get('/', this.handleRoot.bind(this));
+        //router.get('/', this.handleRoot.bind(this));
 
         // Part 1 stuff
         router.post('/login', this.handleLogin.bind(this));
@@ -68,18 +68,18 @@ class API {
 
         // Empty/invalid query
         if (!body || !body.query) {
-            console.log("body in API filterCourses is empty");
+            console.log("body in API filterCourses is empty - api.js");
             return;
         }
 
         this.database.filterCourses(body.query).then(res => {
-            
+            //console.log(res.recordset[0]['']);
             if(!res) {
                 console.log("response in API filterCourses is empty");
                 response.json({ success: false });
             } else{
                //console.log(true);
-               response.json({ success: true });
+               response.json({ success: true, val: res.recordset[0][''] });
             }
            
        });
