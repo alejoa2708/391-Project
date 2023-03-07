@@ -223,6 +223,86 @@ class Database {
     close() {
         if (this.connection) this.connection.end();
     }
+
+    /**
+     * Course names getter
+     * @returns course information
+     */
+    getCoursesName = async() => {
+        try{
+            let pool = await this.sql.connect(this.config);
+            var query = `
+                        SELECT distinct Cname
+                        FROM dbo.Course
+                        `
+            let course = pool.request().query(query);
+            //console.log(course);
+            return course;
+        }
+        catch(err){
+            console.log(err)
+        }
+    }
+
+    /**
+     * Course departments getter
+     * @returns course information
+     */
+    getCoursesDepartment = async() => {
+        try{
+            let pool = await this.sql.connect(this.config);
+            var query = `
+                        SELECT distinct dept
+                        FROM dbo.Course
+                        `
+            let course = pool.request().query(query);
+            //console.log(course);
+            return course;
+        }
+        catch(err){
+            console.log(err)
+        }
+    }
+
+    /**
+     * Date years getter 
+     * @returns course information
+     */
+    getDateYear = async() => {
+        try{
+            let pool = await this.sql.connect(this.config);
+            var query = `
+                        SELECT distinct year
+                        FROM dbo.Date
+                        `
+            let course = pool.request().query(query);
+            //console.log(course);
+            return course;
+        }
+        catch(err){
+            console.log(err)
+        }
+    }
+
+    /**
+     * Instructor departments getter
+     * @returns course information
+     */
+    getInstructorDepartment = async() => {
+        try{
+            let pool = await this.sql.connect(this.config);
+            var query = `
+                        SELECT distinct dept
+                        FROM dbo.Instructor
+                        `
+            let course = pool.request().query(query);
+            //console.log(course);
+            return course;
+        }
+        catch(err){
+            console.log(err)
+        }
+    }
 }
 module.exports = Database;
 

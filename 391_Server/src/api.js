@@ -54,6 +54,10 @@ class API {
 
         // Part 2 stuff
         router.post('/filterCourses', this.filterCourses.bind(this));
+        router.post('/getCoursesName', this.getCoursesName.bind(this));
+        router.post('/getCoursesDepartment', this.getCoursesDepartment.bind(this));
+        router.post('/getDateYear', this.getDateYear.bind(this));
+        router.post('/getInstructorDepartment', this.getInstructorDepartment.bind(this));
 
     }
 
@@ -196,6 +200,54 @@ class API {
         this.database.filterStudentsFirstLast(body.firstName, body.lastName).then(res => {
             console.log(res);
             console.log("did it work?\n");
+            response.json(res);
+        });
+    }
+
+    /**
+     * Course name getter method. Retrieves courses name data.
+     * @param response Response to the client indicating the success status.
+     */
+    getCoursesName(request, response){
+        let body = request.body;
+            
+        this.database.getCoursesName().then(res => {
+            response.json(res);
+        });
+    }
+
+    /**
+     * Course department getter method. Retrieves courses departments data.
+     * @param response Response to the client indicating the success status.
+     */
+    getCoursesDepartment(request, response){
+        let body = request.body;
+            
+        this.database.getCoursesDepartment().then(res => {
+            response.json(res);
+        });
+    }
+
+    /**
+     * Date years getter method. Retrieves date years data.
+     * @param response Response to the client indicating the success status.
+     */
+    getDateYear(request, response){
+        let body = request.body;
+            
+        this.database.getDateYear().then(res => {
+            response.json(res);
+        });
+    }
+
+    /**
+     * Instructor departments getter method. Retrieves instructor departments data.
+     * @param response Response to the client indicating the success status.
+     */
+    getInstructorDepartment(request, response){
+        let body = request.body;
+            
+        this.database.getInstructorDepartment().then(res => {
             response.json(res);
         });
     }
