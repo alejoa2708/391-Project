@@ -5,8 +5,6 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
 import { Typography } from "@mui/material";
 
 /**
@@ -37,72 +35,10 @@ const queryBuilder = (
   instructorTitle,
   year,
   term,
-  courseTitle
+  courseTitle,
+  courseDepartment
 ) => {
   let query = `SELECT COUNT(*) FROM Fact FT`;
-
-  if (gender || department || instructorTitle) {
-    query += " JOIN Instructor I ON FT.ins_id = I.ins_id";
-  }
-
-  if (year || term) {
-    query += " JOIN Date D ON D.date_id = FT.date_id";
-  }
-
-  if (courseTitle) {
-    query += " JOIN Course C ON C.course_id = FT.course_id";
-  }
-
-  if (gender || department || instructorTitle || year || term || courseTitle) {
-    query += " WHERE";
-
-    if (gender) {
-      query += ` I.gender = '${gender}'`;
-    }
-
-    if (department) {
-      query += gender ? " AND" : "";
-      query += ` I.dept = '${department}'`;
-    }
-
-    if (instructorTitle) {
-      query += gender || department ? " AND" : "";
-      query += ` I.title = '${instructorTitle}'`;
-    }
-
-    if (year) {
-      query += gender || department || instructorTitle ? " AND" : "";
-      query += ` D.year = '${year}'`;
-    }
-
-    if (term) {
-      query += gender || department || instructorTitle || year ? " AND" : "";
-      query += ` D.semester = '${term}'`;
-    }
-
-    // might have to change this to contains not just a where clause
-    if (courseTitle) {
-      query +=
-        gender || department || instructorTitle || year || term ? " AND" : "";
-      query += ` C.title = '${courseTitle}'`;
-    }
-  }
-  
-  console.log(query);
-};
-
-const TabFour = () => {
-  const [gender, setGender] = useState("");
-  const [department, setDepartment] = useState("");
-  const [instructorTitle, setInstructorTitle] = useState("");
-  const [year, setYear] = useState("");
-  const [term, setTerm] = useState("");
-  const [courseTitle, setCourseTitle] = useState("");
-  const [courseNum, setcourseNum] = useState("");
-
-  useEffect(() => {
-    // This function will be called whenever there is a change
-    let query = `SELECT COUNT(*) FROM Fact FT`;
 
     if (gender || department || instructorTitle) {
       query += " JOIN Instructor I ON FT.ins_id = I.ins_id";
@@ -112,11 +48,11 @@ const TabFour = () => {
       query += " JOIN Date D ON D.date_id = FT.date_id";
     }
 
-    if (courseTitle) {
+    if (courseTitle || courseDepartment) {
       query += " JOIN Course C ON C.course_id = FT.course_id";
     }
 
-    if (gender || department || instructorTitle || year || term || courseTitle) {
+    if (gender || department || instructorTitle || year || term || courseTitle || courseDepartment) {
       query += " WHERE";
 
       if (gender) {
@@ -143,14 +79,45 @@ const TabFour = () => {
         query += ` D.semester = '${term}'`;
       }
 
-      // might have to change this to contains not just a where clause
       if (courseTitle) {
         query +=
           gender || department || instructorTitle || year || term ? " AND" : "";
-        query += ` C.title = '${courseTitle}'`;
+        query += ` C.Cname = '${courseTitle}'`;
+      }
+
+      if (courseDepartment) {
+        query += gender || department || instructorTitle || year || term || courseTitle ? " AND" : "";
+        query += ` C.dept = '${courseDepartment}'`;
       }
     }
+  return query;
+};
 
+const TabFour = () => {
+
+  // dropdown data
+  const [courseNameOptions, setCourseNameOptions] = useState([]);
+  const [courseDeptOptions, setCourseDeptOptions] = useState([]);
+  const [dateYearOptions, setDateYearOptions] = useState([]);
+  const [instructorDeptOptions, setInstructorDeptOptions] = useState([]);
+
+  // filter selections
+  const [gender, setGender] = useState("");
+  const [department, setDepartment] = useState("");
+  const [instructorTitle, setInstructorTitle] = useState("");
+  const [year, setYear] = useState("");
+  const [term, setTerm] = useState("");
+  const [courseTitle, setCourseTitle] = useState("");
+  const [courseDepartment, setCourseDepartment] = useState("");
+
+  // total courses according to filters
+  const [courseNum, setcourseNum] = useState("");
+
+  useEffect(() => {
+    // This function will be called whenever there is a change
+    const query = queryBuilder(gender, department, instructorTitle, year, term, courseTitle, courseDepartment)
+
+    console.log(query)
     // runs the queries right after selecting filters
     Helper.post(Helper.getAPIUrl("filterCourses"), {
       query
@@ -160,11 +127,26 @@ const TabFour = () => {
         return;
       }
       setcourseNum(response.data.val);
-      console.log(response.data.val);
+      console.log(response.data.val)
       return;
   });
     // queryBuilder(gender, department, instructorTitle, year, term, courseTitle);
-  }, [gender, department, instructorTitle, year, term, courseTitle]);
+  }, [gender, department, instructorTitle, year, term, courseTitle, courseDepartment]);
+
+  useEffect(() => {
+    Helper.post(Helper.getAPIUrl("getCoursesName"), {}).then((response) => {
+      setCourseNameOptions(response.data.recordsets[0]);
+    });
+    Helper.post(Helper.getAPIUrl("getCoursesDepartment"), {}).then((response) => {
+      setCourseDeptOptions(response.data.recordsets[0]);
+    });
+    Helper.post(Helper.getAPIUrl("getDateYear"), {}).then((response) => {
+      setDateYearOptions(response.data.recordsets[0]);
+    });
+    Helper.post(Helper.getAPIUrl("getInstructorDepartment"), {}).then((response) => {
+      setInstructorDeptOptions(response.data.recordsets[0]);
+    });
+  })
 
   return (
     <>
@@ -210,11 +192,11 @@ const TabFour = () => {
                     <MenuItem value="">
                       <em>None</em>
                     </MenuItem>
-                    <MenuItem value={"Male"}>Male</MenuItem>
-                    <MenuItem value={"Female"}>Female</MenuItem>
+                    <MenuItem value={"M"}>Male</MenuItem>
+                    <MenuItem value={"F"}>Female</MenuItem>
                   </Select>
                 </FormControl>
-                <FormControl variant="filled" sx={{ m: 1, minWidth: 150 }}>
+                <FormControl variant="filled" sx={{ m: 1, minWidth: 200 }}>
                   <InputLabel id="demo-simple-select-filled-label">
                     Department
                   </InputLabel>
@@ -229,10 +211,11 @@ const TabFour = () => {
                     <MenuItem value="">
                       <em>None</em>
                     </MenuItem>
-                    <MenuItem value={"Computer Science"}>
-                      Computer Science
-                    </MenuItem>
-                    <MenuItem value={"Psychology"}>Psychology</MenuItem>
+                    {instructorDeptOptions && instructorDeptOptions.map((item) => 
+                      <MenuItem key={item.dept} value={item.dept}>
+                        {item.dept}
+                      </MenuItem>)
+                    }
                   </Select>
                 </FormControl>
                 <FormControl variant="filled" sx={{ m: 1, minWidth: 120 }}>
@@ -250,8 +233,8 @@ const TabFour = () => {
                     <MenuItem value="">
                       <em>None</em>
                     </MenuItem>
-                    <MenuItem value={"Mr"}>Mr.</MenuItem>
-                    <MenuItem value={"Mrs"}>Mrs.</MenuItem>
+                    <MenuItem value={"Assoc"}>Associate</MenuItem>
+                    <MenuItem value={"Prof"}>Professor</MenuItem>
                   </Select>
                 </FormControl>
               </div>
@@ -272,8 +255,11 @@ const TabFour = () => {
                     <MenuItem value="">
                       <em>None</em>
                     </MenuItem>
-                    <MenuItem value={"1999"}>1999</MenuItem>
-                    <MenuItem value={"2000"}>2000</MenuItem>
+                    {dateYearOptions && dateYearOptions.map((item) => 
+                      <MenuItem key={item.year} value={item.year}>
+                        {item.year}
+                      </MenuItem>)
+                    }
                   </Select>
                 </FormControl>
                 <FormControl variant="filled" sx={{ m: 1, minWidth: 120 }}>
@@ -291,31 +277,59 @@ const TabFour = () => {
                     <MenuItem value="">
                       <em>None</em>
                     </MenuItem>
-                    <MenuItem value={"Winter"}>Winter</MenuItem>
-                    <MenuItem value={"Fall"}>Fall</MenuItem>
-                    <MenuItem value={"Spring"}>Spring</MenuItem>
+                    <MenuItem value={"WIN"}>Winter</MenuItem>
+                    <MenuItem value={"FAL"}>Fall</MenuItem>
+                    <MenuItem value={"SPR"}>Spring</MenuItem>
+                    <MenuItem value={"SUM"}>Summer</MenuItem>
                   </Select>
                 </FormControl>
               </div>
               <div style={{ padding: "10px" }}>
                 <div style={{ paddingLeft: "10px" }}>Course</div>
-                <Box
-                  component="form"
-                  sx={{
-                    "& > :not(style)": { m: 1, width: "55ch" },
-                  }}
-                  noValidate
-                  autoComplete="off"
-                >
-                  <TextField
-                    id="filled-basic"
-                    label="Course name"
-                    variant="filled"
+                <FormControl variant="filled" sx={{ m: 1, minWidth: 200 }}>
+                  <InputLabel id="demo-simple-select-filled-label">
+                    Course Name
+                  </InputLabel>
+                  <Select
+                    labelId="demo-simple-select-filled-label"
+                    id="demo-simple-select-filled"
+                    value={courseTitle}
                     onChange={(event) => {
                       setCourseTitle(event.target.value);
                     }}
-                  />
-                </Box>
+                  >
+                    <MenuItem value="">
+                      <em>None</em>
+                    </MenuItem>
+                    {courseNameOptions && courseNameOptions.map((item) => 
+                      <MenuItem key={item.Cname} value={item.Cname}>
+                        {item.Cname}
+                      </MenuItem>)
+                    }
+                  </Select>
+                </FormControl>
+                <FormControl variant="filled" sx={{ m: 1, minWidth: 200 }}>
+                  <InputLabel id="demo-simple-select-filled-label">
+                    Department
+                  </InputLabel>
+                  <Select
+                    labelId="demo-simple-select-filled-label"
+                    id="demo-simple-select-filled"
+                    value={courseDepartment}
+                    onChange={(event) => {
+                      setCourseDepartment(event.target.value);
+                    }}
+                  >
+                    <MenuItem value="">
+                      <em>None</em>
+                    </MenuItem>
+                    {courseDeptOptions && courseDeptOptions.map((item) => 
+                      <MenuItem key={item.dept} value={item.dept}>
+                        {item.dept}
+                      </MenuItem>)
+                    }
+                  </Select>
+                </FormControl>
               </div>
             </div>
           </div>
