@@ -40,7 +40,7 @@ function Login() {
 	 */
 	function onLoginButton() {
 	  
-		if (email.length < 3) {
+		/* if (email.length < 3) {
 		  return sendError('The email you have entered is invalid.');
 		}
 	  
@@ -56,7 +56,9 @@ function Login() {
 		  //props.history.push('/dashboard');
 		  //console.log("hello world");
 		  window.location.replace('/dashboard');
-		});
+		}); */
+
+		window.location.replace('/dashboard');
 	}
 	
 	/**

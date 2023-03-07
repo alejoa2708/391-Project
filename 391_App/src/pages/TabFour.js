@@ -9,6 +9,27 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { Typography } from "@mui/material";
 
+/**
+   * Filter button function. Takes the created query from queryBuilder and sends it as a request.
+   * Updates and filters the courses tables if succeeds.
+   */
+function handleFilter() {
+  let query = queryBuilder;
+  console.log(query)
+  Helper.post(Helper.getAPIUrl("filterCourses"), {
+    query
+  }).then((response) => {
+    if (!response || !response.data || !response.data.success) {
+      console.error(
+        `Something went wrong...`
+      );
+      return;
+    }
+    console.log(response.data.val);
+    return;
+  });
+}
+
 // THIS IS JUST A SAMPLE DOESNT USE THE ACTUAL TABLES
 const queryBuilder = (
   gender,
@@ -18,18 +39,18 @@ const queryBuilder = (
   term,
   courseTitle
 ) => {
-  let query = `SELECT D.*, I.*, C.* FROM factTable FT`;
+  let query = `SELECT COUNT(*) FROM Fact FT`;
 
   if (gender || department || instructorTitle) {
-    query += " JOIN Instructors I ON FT.iid = I.iid";
+    query += " JOIN Instructor I ON FT.ins_id = I.ins_id";
   }
 
   if (year || term) {
-    query += " JOIN Date D ON D.did = FT.did";
+    query += " JOIN Date D ON D.date_id = FT.date_id";
   }
 
   if (courseTitle) {
-    query += " JOIN Course C ON C.cid = FT.cid";
+    query += " JOIN Course C ON C.course_id = FT.course_id";
   }
 
   if (gender || department || instructorTitle || year || term || courseTitle) {
@@ -41,7 +62,7 @@ const queryBuilder = (
 
     if (department) {
       query += gender ? " AND" : "";
-      query += ` I.department = '${department}'`;
+      query += ` I.dept = '${department}'`;
     }
 
     if (instructorTitle) {
@@ -56,7 +77,7 @@ const queryBuilder = (
 
     if (term) {
       query += gender || department || instructorTitle || year ? " AND" : "";
-      query += ` D.term = '${term}'`;
+      query += ` D.semester = '${term}'`;
     }
 
     // might have to change this to contains not just a where clause
@@ -66,8 +87,7 @@ const queryBuilder = (
       query += ` C.title = '${courseTitle}'`;
     }
   }
-
-
+  
   console.log(query);
 };
 
@@ -78,30 +98,73 @@ const TabFour = () => {
   const [year, setYear] = useState("");
   const [term, setTerm] = useState("");
   const [courseTitle, setCourseTitle] = useState("");
+  const [courseNum, setcourseNum] = useState("");
 
   useEffect(() => {
     // This function will be called whenever there is a change
-    queryBuilder(gender, department, instructorTitle, year, term, courseTitle)
-  }, [gender, department, instructorTitle, year, term, courseTitle]);
+    let query = `SELECT COUNT(*) FROM Fact FT`;
 
-  /**
-   * Filter button function. Takes the created query from queryBuilder and sends it as a request.
-   * Updates and filters the courses tables if succeeds.
-   */
-  function handleFilter() {
-    let query = queryBuilder();
+    if (gender || department || instructorTitle) {
+      query += " JOIN Instructor I ON FT.ins_id = I.ins_id";
+    }
+
+    if (year || term) {
+      query += " JOIN Date D ON D.date_id = FT.date_id";
+    }
+
+    if (courseTitle) {
+      query += " JOIN Course C ON C.course_id = FT.course_id";
+    }
+
+    if (gender || department || instructorTitle || year || term || courseTitle) {
+      query += " WHERE";
+
+      if (gender) {
+        query += ` I.gender = '${gender}'`;
+      }
+
+      if (department) {
+        query += gender ? " AND" : "";
+        query += ` I.dept = '${department}'`;
+      }
+
+      if (instructorTitle) {
+        query += gender || department ? " AND" : "";
+        query += ` I.title = '${instructorTitle}'`;
+      }
+
+      if (year) {
+        query += gender || department || instructorTitle ? " AND" : "";
+        query += ` D.year = '${year}'`;
+      }
+
+      if (term) {
+        query += gender || department || instructorTitle || year ? " AND" : "";
+        query += ` D.semester = '${term}'`;
+      }
+
+      // might have to change this to contains not just a where clause
+      if (courseTitle) {
+        query +=
+          gender || department || instructorTitle || year || term ? " AND" : "";
+        query += ` C.title = '${courseTitle}'`;
+      }
+    }
+
+    // runs the queries right after selecting filters
     Helper.post(Helper.getAPIUrl("filterCourses"), {
       query
     }).then((response) => {
       if (!response || !response.data || !response.data.success) {
-        console.error(
-          `Something went wrong...`
-        );
+        console.error(`Something went wrong...`);
         return;
       }
+      setcourseNum(response.data.val);
+      console.log(response.data.val);
       return;
-    });
-  }
+  });
+    // queryBuilder(gender, department, instructorTitle, year, term, courseTitle);
+  }, [gender, department, instructorTitle, year, term, courseTitle]);
 
   return (
     <>
@@ -187,8 +250,8 @@ const TabFour = () => {
                     <MenuItem value="">
                       <em>None</em>
                     </MenuItem>
-                    <MenuItem value={"Mr."}>Mr.</MenuItem>
-                    <MenuItem value={"Mrs."}>Mrs.</MenuItem>
+                    <MenuItem value={"Mr"}>Mr.</MenuItem>
+                    <MenuItem value={"Mrs"}>Mrs.</MenuItem>
                   </Select>
                 </FormControl>
               </div>
@@ -259,13 +322,13 @@ const TabFour = () => {
           <div
             style={{
               flexBasis: "45%",
-              display: "flex",
+              display: "flex",  
               justifyContent: "center",
               textAlign: "center",
               marginTop: "125px",
             }}
           >
-            <Typography variant="h1">700000</Typography>
+            <Typography variant="h1">{courseNum}</Typography>
           </div>
         </div>
       </div>
