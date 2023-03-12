@@ -59,6 +59,35 @@ class API {
         router.post('/getDateYear', this.getDateYear.bind(this));
         router.post('/getInstructorDepartment', this.getInstructorDepartment.bind(this));
 
+        //Part 3 Stuff
+        router.post(('/storeXMLData'), this.handleXMLData.bind(this));
+
+    }
+
+    /**
+     * Handles the request for storing Data using XML input file.
+     * @param {*} request 
+     * @param {*} response 
+     */
+    handleXMLData(request, response){
+        let body = request.body;
+
+        // Empty/invalid query
+        if (!body || !body.query) {
+            console.log("XML data was not parsed properly or is empty - api.js");
+            return;
+        }
+
+        this.database.filterCourses(body.query).then(res => {
+            if(!res) {
+                console.log("response XML data is empty");
+                response.json({ success: false });
+            } else{
+               //console.log(true);
+               response.json({ success: true });
+            }
+           
+       });
     }
 
     /**
