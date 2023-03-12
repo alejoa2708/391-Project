@@ -9,7 +9,7 @@ BEGIN
     INSERT INTO Fact (ins_id, date_id, course_id) VALUES (@ins_id, @date_id, @course_id);
 
     SET @i = @i + 1;
-END
+END;
 
 
 -- Use this code to remove any dups if they exist

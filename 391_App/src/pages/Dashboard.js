@@ -8,6 +8,7 @@ import TabOne from './TabOne.js';
 import TabTwo from './TabTwo.js';
 import TabThree from './TabThree.js';
 import TabFour from './TabFour.js';
+import TabFive from './TabFive.js';
 
 const Dashboard = () => {
 	
@@ -18,7 +19,8 @@ const Dashboard = () => {
 	const [tab1, setTab1] = useState(false);
 	const [tab2, setTab2] = useState(false);
 	const [tab3, setTab3] = useState(false);
-	const [tab4, setTab4] = useState(true);
+	const [tab4, setTab4] = useState(false);
+	const [tab5, setTab5] = useState(true);
 	const history = useHistory();
 
 	function onSelectMenu (elementId){
@@ -45,6 +47,11 @@ const Dashboard = () => {
 			setTab4(true);
 		} else {
 			setTab4(false);
+		}
+		if(tabNum == 5) {
+			setTab5(true);
+		} else {
+			setTab5(false);
 		}
 	}
 
@@ -161,6 +168,7 @@ const Dashboard = () => {
 						{tab2 && <TabTwo />}
 						{tab3 && <TabThree />}
 						{tab4 && <TabFour />}
+						{tab5 && <TabFive />}
 					</IonGrid>
 								
 				</div>
