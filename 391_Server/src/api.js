@@ -70,15 +70,17 @@ class API {
      * @param {*} response 
      */
     handleXMLData(request, response){
+        //console.log(request.body);
         let body = request.body;
-
-        // Empty/invalid query
-        if (!body || !body.query) {
+        //console.log(`API: ${JSON.stringify(body)}`);
+        console.log(body);
+        // Empty/invalid body
+        if (!body) {
             console.log("XML data was not parsed properly or is empty - api.js");
             return;
         }
 
-        this.database.filterCourses(body.query).then(res => {
+        this.database.storeXML(body).then(res => {
             if(!res) {
                 console.log("response XML data is empty");
                 response.json({ success: false });

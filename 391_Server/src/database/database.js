@@ -9,6 +9,26 @@ class Database {
     }
 
     /**
+     * Store XML data to Database Warehouse
+     * @param {*} transformedData 
+     * @returns 
+     */
+    storeXML = async(transformedData) => {
+        //console.log(transformedData.transformedData[0]);
+        let ins_id = transformedData.transformedData[0][0];
+        let date_id = transformedData.transformedData[0][1];
+        let course_id = transformedData.transformedData[0][2];
+        try{
+            let pool = await this.sql.connect(this.config);
+            let success = pool.request().query(`INSERT INTO Fact (ins_id, date_id, course_id) VALUES (${ins_id}, ${date_id}, ${course_id});`);
+            return success;
+        }
+        catch(err){
+            console.log(err)
+        }
+    }
+
+    /**
      * Retrieves filetered courses based on the requested query.
      * @param {*} query 
      * @returns 
