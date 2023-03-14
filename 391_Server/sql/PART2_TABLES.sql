@@ -29,7 +29,7 @@ CREATE TABLE Fact (
     ins_id INT NOT NULL,
     date_id INT NOT NULL,
     course_id INT NOT NULL,
-    count INT DEFAULT 1,
+    count INT,
     FOREIGN KEY (ins_id) REFERENCES Instructor(ins_id),
     FOREIGN KEY (date_id) REFERENCES Date(date_id),
     FOREIGN KEY (course_id) REFERENCES Course(course_id)
