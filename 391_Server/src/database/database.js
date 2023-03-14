@@ -9,22 +9,126 @@ class Database {
     }
 
     /**
+     * Checks if ins_id, date_id, course_id combo already in Fact table, if not stores it
+     * @param {*} ins_id, date_id, course_id
+     * @returns 
+     */
+    checkFactCombo = async(ins_id, date_id, course_id) => {
+        try {
+            let pool = await this.sql.connect(this.config);
+            let check = await pool.request().query(`SELECT count(*) as Total FROM Fact WHERE ins_id = ${ins_id} AND date_id = ${date_id} AND course_id = ${course_id};`)
+            console.log(check.recordset[0].Total)
+            if (check.recordset[0].Total === 0) {
+                try {
+                    pool.request().query(`INSERT INTO Fact (ins_id, date_id, course_id) VALUES (${ins_id}, ${date_id}, ${course_id});`);
+                    console.log("Insert fact success");
+                } catch {
+                    console.log("Insert fact failed");
+                }
+            } else {
+                try {
+                    pool.request().query(`UPDATE Fact SET count = count + 1 WHERE ins_id = ${ins_id} AND date_id = ${date_id} AND course_id = ${course_id};`);
+                    console.log("Increment fact success");
+                } catch {
+                    console.log("Increment fact failed");
+                }
+            }
+        } catch {
+            console.log("Check fact failed");
+        }
+    }
+
+    /**
+     * Checks if Course Id already in Course table, if not stores it
+     * @param {*} course_id
+     * @returns 
+     */
+    checkCourseId = async(course_id) => {
+        try {
+            let pool = await this.sql.connect(this.config);
+            let check = await pool.request().query(`SELECT count(*) as Total FROM Course WHERE course_id = ${course_id};`)
+            console.log(check.recordset[0].Total)
+            if (check.recordset[0].Total <= 0) {
+                try {
+                    pool.request().query(`INSERT INTO Course (course_id) VALUES (${course_id});`);
+                    console.log("Insert course_id success");
+                } catch {
+                    console.log("Insert course_id failed");
+                }
+            } else {
+                console.log("course_id found");
+            }
+        } catch {
+            console.log("Check course_idfailed");
+        }
+    }
+
+    /**
+     * Checks if Date Id already in Date table, if not stores it
+     * @param {*} date_id
+     * @returns 
+     */
+    checkDateId = async(date_id) => {
+        try {
+            let pool = await this.sql.connect(this.config);
+            let check = await pool.request().query(`SELECT count(*) as Total FROM Date WHERE date_id = ${date_id};`)
+            console.log(check.recordset[0].Total);
+            if (check.recordset[0].Total <= 0) {
+                try {
+                    pool.request().query(`INSERT INTO Date (date_id) VALUES (${date_id});`);
+                    console.log("Insert date_id success");
+                } catch {
+                    console.log("Insert date_id failed");
+                }
+            } else {
+                console.log("date_id found");
+            }
+        } catch {
+            console.log("Check date_id failed");
+        }
+    }
+
+    /**
+     * Checks if Instructor Id already in Instructor table, if not stores it
+     * @param {*} ins_id
+     * @returns 
+     */
+    checkInstructorId = async(ins_id) => {
+        try {
+            let pool = await this.sql.connect(this.config);
+            let check = await pool.request().query(`SELECT count(*) as Total FROM Instructor WHERE ins_id = ${ins_id};`)
+            console.log(check.recordset[0].Total)
+            if (check.recordset[0].Total <= 0) {
+                try {
+                    pool.request().query(`INSERT INTO Instructor (ins_id) VALUES (${ins_id});`);
+                    console.log("Insert date_id success");
+                } catch {
+                    console.log("Insert ins_id failed");
+                }
+            } else {
+                console.log("ins_id found");
+            }
+        } catch {
+            console.log("Check ins_id failed");
+        }
+    }
+
+    /**
      * Store XML data to Database Warehouse
      * @param {*} transformedData 
      * @returns 
      */
     storeXML = async(transformedData) => {
-        //console.log(transformedData.transformedData[0]);
-        let ins_id = transformedData.transformedData[0][0];
-        let date_id = transformedData.transformedData[0][1];
-        let course_id = transformedData.transformedData[0][2];
-        try{
-            let pool = await this.sql.connect(this.config);
-            let success = pool.request().query(`INSERT INTO Fact (ins_id, date_id, course_id) VALUES (${ins_id}, ${date_id}, ${course_id});`);
-            return success;
-        }
-        catch(err){
-            console.log(err)
+        for (let i = 0; i < Object.keys(transformedData.transformedData).length; i++) {
+            let row = transformedData.transformedData[i];
+            let ins_id = row[0];
+            let date_id = row[1];
+            let course_id = row[2];
+            console.log(ins_id)
+            this.checkInstructorId(ins_id);
+            this.checkDateId(date_id)
+            this.checkCourseId(course_id);
+            this.checkFactCombo(ins_id, date_id, course_id);
         }
     }
 
