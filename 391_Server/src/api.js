@@ -73,7 +73,7 @@ class API {
         //console.log(request.body);
         let body = request.body;
         //console.log(`API: ${JSON.stringify(body)}`);
-        console.log(body);
+        //console.log(body);
         // Empty/invalid body
         if (!body) {
             console.log("XML data was not parsed properly or is empty - api.js");
@@ -82,7 +82,7 @@ class API {
 
         this.database.storeXML(body).then(res => {
             if(!res) {
-                console.log("response XML data is empty");
+                //console.log("response XML data is empty");
                 response.json({ success: false });
             } else{
                //console.log(true);
