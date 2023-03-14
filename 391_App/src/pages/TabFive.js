@@ -28,9 +28,10 @@ const TabFive = () => {
           const inst_id = fact.querySelector('ins_id').textContent.replace(/[\t\n]/g, '');
           const date_id = fact.querySelector('date_id').textContent.replace(/[\t\n]/g, '');
           const course_id = fact.querySelector('course_id').textContent.replace(/[\t\n]/g, '');
+          const count = fact.querySelector('count').textContent.replace(/[\t\n]/g, '');
 
           //console.log(inst_id, date_id, course_id)
-          transformedDataObj[index] = [parseInt(inst_id), parseInt(date_id), parseInt(course_id)];
+          transformedDataObj[index] = [parseInt(inst_id), parseInt(date_id), parseInt(course_id), parseInt(count)];
           index += 1;
         }
         //console.log(transformedDataObj);

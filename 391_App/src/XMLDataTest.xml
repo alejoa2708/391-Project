@@ -10,6 +10,7 @@
 		<course_id>
 			21
 		</course_id>
+		<count>1</count>
 	</fact>
 	<fact>
 		<ins_id>
@@ -21,6 +22,7 @@
 		<course_id>
 			293
 		</course_id>
+		<count>1</count>
 	</fact>
 	<fact>
 		<ins_id>
@@ -32,5 +34,18 @@
 		<course_id>
 			401
 		</course_id>
+		<count>1</count>
+	</fact>
+	<fact>
+		<ins_id>
+			472
+		</ins_id>
+		<date_id>
+			123
+		</date_id>
+		<course_id>
+			321
+		</course_id>
+		<count>1</count>
 	</fact>
 </dataset>

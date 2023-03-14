@@ -13,14 +13,22 @@ class Database {
      * @param {*} ins_id, date_id, course_id
      * @returns 
      */
-    checkFactCombo = async(ins_id, date_id, course_id) => {
+    checkFactCombo = async(ins_id, date_id, course_id, count) => {
         try {
             let pool = await this.sql.connect(this.config);
             let check = await pool.request().query(`SELECT count(*) as Total FROM Fact WHERE ins_id = ${ins_id} AND date_id = ${date_id} AND course_id = ${course_id};`)
             console.log(check.recordset[0].Total)
             if (check.recordset[0].Total === 0) {
                 try {
-                    pool.request().query(`INSERT INTO Fact (ins_id, date_id, course_id) VALUES (${ins_id}, ${date_id}, ${course_id});`);
+                    pool.request().query(`MERGE INTO Fact AS Target
+                                        USING (VALUES (${ins_id}, ${date_id}, ${course_id}, ${count})) AS Source(ins_id, date_id, course_id, count)
+                                            ON Target.count = Source.count
+                                        WHEN MATCHED THEN
+                                            UPDATE SET Target.count = Target.count + 1
+                                        WHEN NOT MATCHED THEN
+                                            INSERT (ins_id, date_id, course_id, count)
+                                            VALUES (Source.ins_id, Source.date_id, Source.course_id, Source.count);`);
+                                            
                     console.log("Insert fact success");
                 } catch {
                     console.log("Insert fact failed");
@@ -124,11 +132,12 @@ class Database {
             let ins_id = row[0];
             let date_id = row[1];
             let course_id = row[2];
+            let count = row[3];
             console.log(ins_id)
             this.checkInstructorId(ins_id);
             this.checkDateId(date_id)
             this.checkCourseId(course_id);
-            this.checkFactCombo(ins_id, date_id, course_id);
+            this.checkFactCombo(ins_id, date_id, course_id, count);
         }
     }
 
