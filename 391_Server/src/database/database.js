@@ -17,7 +17,7 @@ class Database {
         try {
             let pool = await this.sql.connect(this.config);
             let check = await pool.request().query(`SELECT count(*) as Total FROM Fact WHERE ins_id = ${ins_id} AND date_id = ${date_id} AND course_id = ${course_id};`)
-            console.log(check.recordset[0].Total)
+            console.log(`Fact IDs count: ${check.recordset[0].Total}`)
             if (check.recordset[0].Total === 0) {
                 try {
                     pool.request().query(`MERGE INTO Fact AS Target
@@ -27,8 +27,9 @@ class Database {
                                             UPDATE SET Target.count = Target.count + 1
                                         WHEN NOT MATCHED THEN
                                             INSERT (ins_id, date_id, course_id, count)
-                                            VALUES (Source.ins_id, Source.date_id, Source.course_id, Source.count);`);
-                                            
+                                            VALUES (Source.ins_id, Source.date_id, Source.course_id, Source.count);
+                                        `);
+
                     console.log("Insert fact success");
                 } catch {
                     console.log("Insert fact failed");
@@ -55,10 +56,14 @@ class Database {
         try {
             let pool = await this.sql.connect(this.config);
             let check = await pool.request().query(`SELECT count(*) as Total FROM Course WHERE course_id = ${course_id};`)
-            console.log(check.recordset[0].Total)
+            console.log(`Course ID count: ${check.recordset[0].Total}`)
             if (check.recordset[0].Total <= 0) {
                 try {
-                    pool.request().query(`INSERT INTO Course (course_id) VALUES (${course_id});`);
+                    pool.request().query(`MERGE INTO Course AS target
+                    USING (VALUES (${course_id})) AS source (course_id)
+                    ON target.course_id = source.course_id
+                    WHEN NOT MATCHED BY target THEN
+                    INSERT (course_id) VALUES (source.course_id);`);
                     console.log("Insert course_id success");
                 } catch {
                     console.log("Insert course_id failed");
@@ -80,10 +85,14 @@ class Database {
         try {
             let pool = await this.sql.connect(this.config);
             let check = await pool.request().query(`SELECT count(*) as Total FROM Date WHERE date_id = ${date_id};`)
-            console.log(check.recordset[0].Total);
+            console.log(`Date ID count: ${check.recordset[0].Total}`);
             if (check.recordset[0].Total <= 0) {
                 try {
-                    pool.request().query(`INSERT INTO Date (date_id) VALUES (${date_id});`);
+                    pool.request().query(`MERGE INTO Date AS target
+                    USING (VALUES (${date_id})) AS source (date_id)
+                    ON target.date_id = source.date_id
+                    WHEN NOT MATCHED BY target THEN
+                    INSERT (date_id) VALUES (source.date_id);`);
                     console.log("Insert date_id success");
                 } catch {
                     console.log("Insert date_id failed");
@@ -105,11 +114,15 @@ class Database {
         try {
             let pool = await this.sql.connect(this.config);
             let check = await pool.request().query(`SELECT count(*) as Total FROM Instructor WHERE ins_id = ${ins_id};`)
-            console.log(check.recordset[0].Total)
+            console.log(`Instructor ID count: ${check.recordset[0].Total}`)
             if (check.recordset[0].Total <= 0) {
                 try {
-                    pool.request().query(`INSERT INTO Instructor (ins_id) VALUES (${ins_id});`);
-                    console.log("Insert date_id success");
+                    pool.request().query(`MERGE INTO Instructor AS target
+                    USING (VALUES (${ins_id})) AS source (ins_id)
+                    ON target.ins_id = source.ins_id
+                    WHEN NOT MATCHED BY target THEN
+                    INSERT (ins_id) VALUES (source.ins_id);`);
+                    console.log("Insert ins_id success");
                 } catch {
                     console.log("Insert ins_id failed");
                 }
