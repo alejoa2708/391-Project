@@ -20,7 +20,7 @@ class Database {
             console.log(`Fact IDs count: ${check.recordset[0].Total}`)
             if (check.recordset[0].Total === 0) {
                 try {
-                    await pool.request().query(`INSERT (ins_id, date_id, course_id, count) VALUES (${ins_id}, ${date_id}, ${course_id}, ${count});`);
+                    await pool.request().query(`INSERT INTO Fact (ins_id, date_id, course_id) VALUES (${ins_id}, ${date_id}, ${course_id});`);
                     console.log(`Insert fact success`);
                 } catch {
                     console.log(`Insert fact failed`);
